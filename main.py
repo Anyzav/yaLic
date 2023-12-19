@@ -1,3 +1,6 @@
+import os
+import sys
+
 import pygame
 
 if __name__ == '__main__':
@@ -22,9 +25,82 @@ if __name__ == '__main__':
     pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43), 2)
 
     sc = pygame.image.load('сцена.png')
-    screen.blit(sc, (484, 14))
+    screen.blit(sc, (484, 14)) # отрисовка поля боя
 
-    clock = pygame.time.Clock()
+    characters_of_choice = ['перс1/1.png', 'перс2/1.png', 'перс3/1.png', 'перс4/1.png', 'перс5/1.png', 'перс6/1.png']
+
+    sc = pygame.image.load('перс1/1.png')
+    screen.blit(sc, (15, 230))
+
+    sc = pygame.image.load('перс1/2.png')
+    screen.blit(sc, (15, 419))
+
+    pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
+    pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
+    pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
+    f1 = pygame.font.Font(None, 22)
+    f2 = pygame.font.Font(None, 27)
+    f3 = pygame.font.Font(None, 27)
+    text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+    text2 = f2.render('<-', True, (255, 255, 255))
+    text3 = f3.render('->', True, (255, 255, 255))
+    screen.blit(text1, (30, 390))
+    screen.blit(text2, (22, 230))
+    screen.blit(text3, (97, 230))
+
+    pygame.draw.rect(screen, (246, 143, 255), (124, 388, 117, 19))  # вторая клетка выбора
+    pygame.draw.rect(screen, (246, 143, 255), (124, 232, 28, 17))
+    pygame.draw.rect(screen, (246, 143, 255), (213, 232, 28, 17))
+    f1 = pygame.font.Font(None, 22)
+    f2 = pygame.font.Font(None, 27)
+    f3 = pygame.font.Font(None, 27)
+    text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+    text2 = f2.render('<-', True, (255, 255, 255))
+    text3 = f3.render('->', True, (255, 255, 255))
+    screen.blit(text1, (145, 390))
+    screen.blit(text2, (130, 230))
+    screen.blit(text3, (220, 230))
+
+    pygame.draw.rect(screen, (246, 143, 255), (245, 388, 117, 19))  # третья клетка выбора
+    pygame.draw.rect(screen, (246, 143, 255), (245, 232, 28, 17))
+    pygame.draw.rect(screen, (246, 143, 255), (334, 232, 28, 17))
+    f1 = pygame.font.Font(None, 22)
+    f2 = pygame.font.Font(None, 27)
+    f3 = pygame.font.Font(None, 27)
+    text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+    text2 = f2.render('<-', True, (255, 255, 255))
+    text3 = f3.render('->', True, (255, 255, 255))
+    screen.blit(text1, (265, 390))
+    screen.blit(text2, (251, 230))
+    screen.blit(text3, (340, 230))
+
+    pygame.draw.rect(screen, (246, 143, 255), (366, 388, 107, 19))  # четвёртая клетка выбора
+    pygame.draw.rect(screen, (246, 143, 255), (366, 232, 28, 17))
+    pygame.draw.rect(screen, (246, 143, 255), (445, 232, 28, 17))
+    f1 = pygame.font.Font(None, 22)
+    f2 = pygame.font.Font(None, 27)
+    f3 = pygame.font.Font(None, 27)
+    text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+    text2 = f2.render('<-', True, (255, 255, 255))
+    text3 = f3.render('->', True, (255, 255, 255))
+    screen.blit(text1, (380, 390))
+    screen.blit(text2, (372, 230))
+    screen.blit(text3, (450, 230))
+
+    pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
+    f4 = pygame.font.Font(None, 25)
+    text1 = f4.render('УЛУЧШИТЬ', True, (245, 255, 255))
+    screen.blit(text1, (355, 615))
+
+    pygame.draw.rect(screen, (107, 66, 189), (27, 429, 47, 30))  # конпка улучшить
+    pygame.draw.rect(screen, (107, 66, 189), (410, 429, 47, 30))
+    f5 = pygame.font.Font(None, 42)
+    f6 = pygame.font.Font(None, 42)
+    text1 = f5.render('<-', True, (245, 255, 255))
+    text2 = f6.render('->', True, (245, 255, 255))
+    screen.blit(text1, (38, 429))
+    screen.blit(text2, (419, 429))
+
     pygame.display.update()
     while pygame.event.wait().type != pygame.QUIT:
         pass
