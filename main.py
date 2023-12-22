@@ -25,15 +25,11 @@ if __name__ == '__main__':
     pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43), 2)
 
     sc = pygame.image.load('сцена.png')
-    screen.blit(sc, (484, 14)) # отрисовка поля боя
+    screen.blit(sc, (484, 14))  # отрисовка поля боя
 
-    characters_of_choice = ['перс1/1.png', 'перс2/1.png', 'перс3/1.png', 'перс4/1.png', 'перс5/1.png', 'перс6/1.png']
-
-    sc = pygame.image.load('перс1/1.png')
-    screen.blit(sc, (15, 230))
-
-    sc = pygame.image.load('перс1/2.png')
-    screen.blit(sc, (15, 419))
+    characters_of_choice = [pygame.image.load('pers11.png'), pygame.image.load('pers21.png'),
+                            pygame.image.load('pers31.png'), pygame.image.load('pers41.png'),
+                            pygame.image.load('pers51.png'), pygame.image.load('pers61.png')]  # список персонажей
 
     pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
     pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
@@ -47,6 +43,15 @@ if __name__ == '__main__':
     screen.blit(text1, (30, 390))
     screen.blit(text2, (22, 230))
     screen.blit(text3, (97, 230))
+
+    current_image = 0
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos()
+    screen.blit(characters_of_choice[current_image], (15, 230))
+
+    sc = pygame.image.load('перс1/2.png')
+    screen.blit(sc, (15, 419))
 
     pygame.draw.rect(screen, (246, 143, 255), (124, 388, 117, 19))  # вторая клетка выбора
     pygame.draw.rect(screen, (246, 143, 255), (124, 232, 28, 17))
@@ -100,6 +105,8 @@ if __name__ == '__main__':
     text2 = f6.render('->', True, (245, 255, 255))
     screen.blit(text1, (38, 429))
     screen.blit(text2, (419, 429))
+
+
 
     pygame.display.update()
     while pygame.event.wait().type != pygame.QUIT:
