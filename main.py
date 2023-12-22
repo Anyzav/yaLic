@@ -27,9 +27,9 @@ if __name__ == '__main__':
     sc = pygame.image.load('сцена.png')
     screen.blit(sc, (484, 14))  # отрисовка поля боя
 
-    characters_of_choice = [pygame.image.load('pers11.png'), pygame.image.load('pers21.png'),
-                            pygame.image.load('pers31.png'), pygame.image.load('pers41.png'),
-                            pygame.image.load('pers51.png'), pygame.image.load('pers61.png')]  # список персонажей
+    characters_of_choice = [pygame.image.load('перс1/1.png'), pygame.image.load('перс2/1.png'),
+                            pygame.image.load('перс3/1.png'), pygame.image.load('перс4/1.png'),
+                            pygame.image.load('перс5/1.png'), pygame.image.load('перс6/1.png')]  # список персонажей
 
     pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
     pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
