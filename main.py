@@ -32,8 +32,8 @@ if __name__ == '__main__':
                             pygame.image.load('перс5/1.png'), pygame.image.load('перс6/1.png')]  # список персонажей
 
     pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
-    pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
-    pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
+    left_button_rect = pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
+    right_button_rect = pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
     f3 = pygame.font.Font(None, 27)
@@ -44,11 +44,6 @@ if __name__ == '__main__':
     screen.blit(text2, (22, 230))
     screen.blit(text3, (97, 230))
 
-    current_image = 0
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-    screen.blit(characters_of_choice[current_image], (15, 230))
 
     sc = pygame.image.load('перс1/2.png')
     screen.blit(sc, (15, 419))
@@ -106,9 +101,28 @@ if __name__ == '__main__':
     screen.blit(text1, (38, 429))
     screen.blit(text2, (419, 429))
 
+    current_image = 0
 
-
+    flag = True
+    screen.blit(characters_of_choice[current_image], (13, 228))
     pygame.display.update()
-    while pygame.event.wait().type != pygame.QUIT:
-        pass
+    while flag:
+        pygame.display.update()
+        screen.blit(characters_of_choice[current_image], (13, 228))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gameIsRunning = False
+                pygame.quit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                if left_button_rect.collidepoint(mouse_pos):
+                    current_image -= 1
+                    if current_image < 0:
+                        current_image = len(characters_of_choice) - 1
+                elif right_button_rect.collidepoint(mouse_pos):
+                    current_image += 1
+                    if current_image >= len(characters_of_choice):
+                        current_image = 0
+
     pygame.quit()
