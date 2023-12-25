@@ -113,6 +113,7 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 gameIsRunning = False
                 pygame.quit()
+                flag = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
