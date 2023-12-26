@@ -163,7 +163,7 @@ if __name__ == '__main__':
                     if current_image_4 >= len(characters_of_choice):
                         current_image_4 = 0
                 elif choice_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "выбрать" в четвёртой клетке
-                    selected_characters.append(current_image_3)
+                    selected_characters.append(current_image_4)
 
     print(selected_characters)
 
