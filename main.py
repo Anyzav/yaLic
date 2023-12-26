@@ -29,7 +29,8 @@ if __name__ == '__main__':
 
     characters_of_choice = [pygame.image.load('перс1/1.png'), pygame.image.load('перс2/1.png'),
                             pygame.image.load('перс3/1.png'), pygame.image.load('перс4/1.png'),
-                            pygame.image.load('перс5/1.png'), pygame.image.load('перс6/1.png')]  # список персонажей
+                            pygame.image.load('перс5/1.png'), pygame.image.load('перс6/1.png'),
+                            pygame.image.load('перс7/1.png'), pygame.image.load('перс8/1.png')]  # список персонажей
 
     pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
     left_button_rect = pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
@@ -104,11 +105,9 @@ if __name__ == '__main__':
     current_image = 0
 
     flag = True
-    screen.blit(characters_of_choice[current_image], (13, 228))
-    pygame.display.update()
     while flag:
         pygame.display.update()
-        screen.blit(characters_of_choice[current_image], (13, 228))
+        screen.blit(characters_of_choice[current_image], (19, 254))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameIsRunning = False
