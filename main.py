@@ -32,9 +32,11 @@ if __name__ == '__main__':
                             pygame.image.load('перс5/1.png'), pygame.image.load('перс6/1.png'),
                             pygame.image.load('перс7/1.png'), pygame.image.load('перс8/1.png')]  # список персонажей
 
-    pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
-    left_button_rect = pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
-    right_button_rect = pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
+    selected_characters = []  # список выбранных персонажей
+
+    choice_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
+    left_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
+    right_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
     f3 = pygame.font.Font(None, 27)
@@ -49,9 +51,9 @@ if __name__ == '__main__':
     sc = pygame.image.load('перс1/2.png')
     screen.blit(sc, (15, 419))
 
-    pygame.draw.rect(screen, (246, 143, 255), (124, 388, 117, 19))  # вторая клетка выбора
-    pygame.draw.rect(screen, (246, 143, 255), (124, 232, 28, 17))
-    pygame.draw.rect(screen, (246, 143, 255), (213, 232, 28, 17))
+    choice_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (124, 388, 117, 19))  # вторая клетка выбора
+    left_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (124, 232, 28, 17))
+    right_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (213, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
     f3 = pygame.font.Font(None, 27)
@@ -62,9 +64,9 @@ if __name__ == '__main__':
     screen.blit(text2, (130, 230))
     screen.blit(text3, (220, 230))
 
-    pygame.draw.rect(screen, (246, 143, 255), (245, 388, 117, 19))  # третья клетка выбора
-    pygame.draw.rect(screen, (246, 143, 255), (245, 232, 28, 17))
-    pygame.draw.rect(screen, (246, 143, 255), (334, 232, 28, 17))
+    choice_button_rect_3 = pygame.draw.rect(screen, (246, 143, 255), (245, 388, 117, 19))  # третья клетка выбора
+    left_button_rect_3 = pygame.draw.rect(screen, (246, 143, 255), (245, 232, 28, 17))
+    right_button_rect_3 = pygame.draw.rect(screen, (246, 143, 255), (334, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
     f3 = pygame.font.Font(None, 27)
@@ -75,9 +77,9 @@ if __name__ == '__main__':
     screen.blit(text2, (251, 230))
     screen.blit(text3, (340, 230))
 
-    pygame.draw.rect(screen, (246, 143, 255), (366, 388, 107, 19))  # четвёртая клетка выбора
-    pygame.draw.rect(screen, (246, 143, 255), (366, 232, 28, 17))
-    pygame.draw.rect(screen, (246, 143, 255), (445, 232, 28, 17))
+    choice_button_rect_4 = pygame.draw.rect(screen, (246, 143, 255), (366, 388, 107, 19))  # четвёртая клетка выбора
+    left_button_rect_4 = pygame.draw.rect(screen, (246, 143, 255), (366, 232, 28, 17))
+    right_button_rect_4 = pygame.draw.rect(screen, (246, 143, 255), (445, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
     f3 = pygame.font.Font(None, 27)
@@ -102,27 +104,67 @@ if __name__ == '__main__':
     screen.blit(text1, (38, 429))
     screen.blit(text2, (419, 429))
 
-    current_image = 0
+    current_image_1 = 0
+    current_image_2 = 0
+    current_image_3 = 0
+    current_image_4 = 0
 
     flag = True
-    while flag:
+    while flag:  # выбор персонажа
         pygame.display.update()
-        screen.blit(characters_of_choice[current_image], (19, 254))
+        screen.blit(characters_of_choice[current_image_1], (19, 254))
+        screen.blit(characters_of_choice[current_image_2], (132, 254))
+        screen.blit(characters_of_choice[current_image_3], (253, 254))
+        screen.blit(characters_of_choice[current_image_4], (370, 254))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameIsRunning = False
                 pygame.quit()
                 flag = False
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                if left_button_rect.collidepoint(mouse_pos):
-                    current_image -= 1
-                    if current_image < 0:
-                        current_image = len(characters_of_choice) - 1
-                elif right_button_rect.collidepoint(mouse_pos):
-                    current_image += 1
-                    if current_image >= len(characters_of_choice):
-                        current_image = 0
+                if left_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "<-" в первой клетке выбора
+                    current_image_1 -= 1
+                    if current_image_1 < 0:
+                        current_image_1 = len(characters_of_choice) - 1
+                elif right_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "->" в первой клетке выбора
+                    current_image_1 += 1
+                    if current_image_1 >= len(characters_of_choice):
+                        current_image_1 = 0
+                elif choice_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "выбрать" в первой клетке выбора
+                    selected_characters.append(current_image_1)
+                elif left_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "<-" во второй клетке выбора
+                    current_image_2 -= 1
+                    if current_image_2 < 0:
+                        current_image_2 = len(characters_of_choice) - 1
+                elif right_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "->" во второй клетке выбора
+                    current_image_2 += 1
+                    if current_image_2 >= len(characters_of_choice):
+                        current_image_2 = 0
+                elif choice_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "выбрать" во второй клетке выбора
+                    selected_characters.append(current_image_2)
+                elif left_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "<-" в третьей клетке выбора
+                    current_image_3 -= 1
+                    if current_image_3 < 0:
+                        current_image_3 = len(characters_of_choice) - 1
+                elif right_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "->" в третьей клетке выбора
+                    current_image_3 += 1
+                    if current_image_3 >= len(characters_of_choice):
+                        current_image_3 = 0
+                elif choice_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "выбрать" в третьей клетке выбора
+                    selected_characters.append(current_image_3)
+                elif left_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "<-" в четвёртой клетке выбора
+                    current_image_4 -= 1
+                    if current_image_4 < 0:
+                        current_image_4 = len(characters_of_choice) - 1
+                elif right_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "->" в четвёртой клетке выбора
+                    current_image_4 += 1
+                    if current_image_4 >= len(characters_of_choice):
+                        current_image_4 = 0
+                elif choice_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "выбрать" в четвёртой клетке
+                    selected_characters.append(current_image_3)
+
+    print(selected_characters)
 
     pygame.quit()
