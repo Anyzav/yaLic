@@ -109,6 +109,11 @@ if __name__ == '__main__':
     current_image_3 = 0
     current_image_4 = 0
 
+    selection_button_1 = True
+    selection_button_2 = False
+    selection_button_3 = False
+    selection_button_4 = False
+
     flag = True
     while flag:  # выбор персонажа
         pygame.display.update()
@@ -122,49 +127,62 @@ if __name__ == '__main__':
                 gameIsRunning = False
                 pygame.quit()
                 flag = False
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                if left_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "<-" в первой клетке выбора
-                    current_image_1 -= 1
-                    if current_image_1 < 0:
-                        current_image_1 = len(characters_of_choice) - 1
-                elif right_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "->" в первой клетке выбора
-                    current_image_1 += 1
-                    if current_image_1 >= len(characters_of_choice):
-                        current_image_1 = 0
-                elif choice_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "выбрать" в первой клетке выбора
-                    selected_characters.append(current_image_1)
-                elif left_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "<-" во второй клетке выбора
-                    current_image_2 -= 1
-                    if current_image_2 < 0:
-                        current_image_2 = len(characters_of_choice) - 1
-                elif right_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "->" во второй клетке выбора
-                    current_image_2 += 1
-                    if current_image_2 >= len(characters_of_choice):
-                        current_image_2 = 0
-                elif choice_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "выбрать" во второй клетке выбора
-                    selected_characters.append(current_image_2)
-                elif left_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "<-" в третьей клетке выбора
-                    current_image_3 -= 1
-                    if current_image_3 < 0:
-                        current_image_3 = len(characters_of_choice) - 1
-                elif right_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "->" в третьей клетке выбора
-                    current_image_3 += 1
-                    if current_image_3 >= len(characters_of_choice):
-                        current_image_3 = 0
-                elif choice_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "выбрать" в третьей клетке выбора
-                    selected_characters.append(current_image_3)
-                elif left_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "<-" в четвёртой клетке выбора
-                    current_image_4 -= 1
-                    if current_image_4 < 0:
-                        current_image_4 = len(characters_of_choice) - 1
-                elif right_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "->" в четвёртой клетке выбора
-                    current_image_4 += 1
-                    if current_image_4 >= len(characters_of_choice):
-                        current_image_4 = 0
-                elif choice_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "выбрать" в четвёртой клетке
-                    selected_characters.append(current_image_4)
+                if selection_button_1:
+                    if left_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "<-" в первой клетке выбора
+                        current_image_1 -= 1
+                        if current_image_1 < 0:
+                            current_image_1 = len(characters_of_choice) - 1
+                    elif right_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "->" в первой клетке выбора
+                        current_image_1 += 1
+                        if current_image_1 >= len(characters_of_choice):
+                            current_image_1 = 0
+                    elif choice_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "выбрать" в первой клетке выбора
+                        selected_characters.append(current_image_1)
+                        selection_button_1 = False
+                        selection_button_2 = True
+                if selection_button_2:
+                    if left_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "<-" во второй клетке выбора
+                        current_image_2 -= 1
+                        if current_image_2 < 0:
+                            current_image_2 = len(characters_of_choice) - 1
+                    elif right_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "->" во второй клетке выбора
+                        current_image_2 += 1
+                        if current_image_2 >= len(characters_of_choice):
+                            current_image_2 = 0
+                    elif choice_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "выбрать" во второй клетке выбора
+                        selected_characters.append(current_image_2)
+                        selection_button_2 = False
+                        selection_button_3 = True
+                if selection_button_3:
+                    if left_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "<-" в третьей клетке выбора
+                        current_image_3 -= 1
+                        if current_image_3 < 0:
+                            current_image_3 = len(characters_of_choice) - 1
+                    elif right_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "->" в третьей клетке выбора
+                        current_image_3 += 1
+                        if current_image_3 >= len(characters_of_choice):
+                            current_image_3 = 0
+                    elif choice_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "выбрать" в третьей клетке выбора
+                        selected_characters.append(current_image_3)
+                        selection_button_3 = False
+                        selection_button_4 = True
+                if selection_button_4:
+                    if left_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "<-" в четвёртой клетке выбора
+                        current_image_4 -= 1
+                        if current_image_4 < 0:
+                            current_image_4 = len(characters_of_choice) - 1
+                    elif right_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "->" в четвёртой клетке выбора
+                        current_image_4 += 1
+                        if current_image_4 >= len(characters_of_choice):
+                            current_image_4 = 0
+                    elif choice_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "выбрать" в четвёртой клетке
+                        selected_characters.append(current_image_4)
+                        selection_button_4 = True
 
     print(selected_characters)
 
     pygame.quit()
+
