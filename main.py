@@ -1,6 +1,6 @@
 import os
 import sys
-
+import random
 import pygame
 
 if __name__ == '__main__':
@@ -32,9 +32,12 @@ if __name__ == '__main__':
                             pygame.image.load('перс5/1.png'), pygame.image.load('перс6/1.png'),
                             pygame.image.load('перс7/1.png'), pygame.image.load('перс8/1.png')]  # список персонажей
 
+    enemies_of_choice = [pygame.image.load('злодей1/1.png'), pygame.image.load('злодей2/1.png'),
+                         pygame.image.load('злодей3/1.png'), pygame.image.load('злодей4/1.png')]  # список врагов
+
     selected_characters = []  # список выбранных персонажей
 
-    finish = pygame.image.load('галочка.png') #галочка
+    finish = pygame.image.load('галочка.png')  # галочка
 
     choice_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
     left_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
@@ -126,6 +129,15 @@ if __name__ == '__main__':
     selection_finish_2 = False
     selection_finish_3 = False
     selection_finish_4 = False
+
+    displaying_enemies_on_the_screen = []  # список врагов для вывода на экран
+    displaying_enemies_on_the_screen = random.choices(enemies_of_choice, k=4)  # выбор 4 врагов
+
+    screen.blit(displaying_enemies_on_the_screen[0], (16, 44))  # вывод врагов на экран
+    screen.blit(displaying_enemies_on_the_screen[1], (125, 44))
+    screen.blit(displaying_enemies_on_the_screen[2], (245, 44))
+    screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
+
 
     flag = True
     while flag:
