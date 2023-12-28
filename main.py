@@ -34,6 +34,8 @@ if __name__ == '__main__':
 
     selected_characters = []  # список выбранных персонажей
 
+    finish = pygame.image.load('галочка.png') #галочка
+
     choice_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (16, 388, 104, 19))  # первая клетка выбора
     left_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
     right_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
@@ -109,18 +111,50 @@ if __name__ == '__main__':
     current_image_3 = 0
     current_image_4 = 0
 
-    selection_button_1 = True
+
+    selection_button_1 = True  # флаги разрешение на тыкание кнопок
     selection_button_2 = False
     selection_button_3 = False
     selection_button_4 = False
 
+    selection_button_flag1 = False  # флаг для вывода на экран изображений после их выбора
+    selection_button_flag2 = False
+    selection_button_flag3 = False
+    selection_button_flag4 = False
+
+    selection_finish_1 = False  # флаг для отслеживания вывода на экран галочек
+    selection_finish_2 = False
+    selection_finish_3 = False
+    selection_finish_4 = False
+
     flag = True
-    while flag:  # выбор персонажа
+    while flag:
         pygame.display.update()
-        screen.blit(characters_of_choice[current_image_1], (19, 254))
-        screen.blit(characters_of_choice[current_image_2], (132, 254))
-        screen.blit(characters_of_choice[current_image_3], (253, 254))
-        screen.blit(characters_of_choice[current_image_4], (370, 254))
+        if selection_button_flag1:
+            screen.blit(selected_characters[0], (19, 254))  # выводим изображение из списка выбранных персонажей
+        else:
+            screen.blit(characters_of_choice[current_image_1], (19, 254))  # на момент ввыбора прокручиваются все изображения
+        if selection_button_flag2:
+            screen.blit(selected_characters[1], (132, 254))
+        else:
+            screen.blit(characters_of_choice[current_image_2], (132, 254))
+        if selection_button_flag3:
+            screen.blit(selected_characters[2], (253, 254))
+        else:
+            screen.blit(characters_of_choice[current_image_3], (253, 254))
+        if selection_button_flag4:
+            screen.blit(selected_characters[3], (370, 254))
+        else:
+            screen.blit(characters_of_choice[current_image_4], (370, 254))
+
+        if selection_finish_1:  # вывод на экран галочек после выбора персонажей
+            screen.blit(finish, (19, 254))
+        if selection_finish_2:
+            screen.blit(finish, (132, 254))
+        if selection_finish_3:
+            screen.blit(finish, (253, 254))
+        if selection_finish_4:
+            screen.blit(finish, (370, 254))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -140,9 +174,13 @@ if __name__ == '__main__':
                         if current_image_1 >= len(characters_of_choice):
                             current_image_1 = 0
                     elif choice_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "выбрать" в первой клетке выбора
-                        selected_characters.append(current_image_1)
+                        selected_characters.append(characters_of_choice[current_image_1])  # добавление 1 персонажа в список выбора
+                        selection_button_flag1 = True
                         selection_button_1 = False
                         selection_button_2 = True
+                        selection_finish_1 = True
+                        del characters_of_choice[current_image_1]  # удаление выбранного персонажа из общего списка
+
                 if selection_button_2:
                     if left_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "<-" во второй клетке выбора
                         current_image_2 -= 1
@@ -153,9 +191,13 @@ if __name__ == '__main__':
                         if current_image_2 >= len(characters_of_choice):
                             current_image_2 = 0
                     elif choice_button_rect_2.collidepoint(mouse_pos):  # если нажимают на "выбрать" во второй клетке выбора
-                        selected_characters.append(current_image_2)
+                        selected_characters.append(characters_of_choice[current_image_2])  # добавление 2 персонажа в список выбора
+                        selection_button_flag2 = True
                         selection_button_2 = False
                         selection_button_3 = True
+                        selection_finish_2 = True
+                        del characters_of_choice[current_image_2]  # удаление выбранного персонажа из общего списка
+
                 if selection_button_3:
                     if left_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "<-" в третьей клетке выбора
                         current_image_3 -= 1
@@ -166,9 +208,13 @@ if __name__ == '__main__':
                         if current_image_3 >= len(characters_of_choice):
                             current_image_3 = 0
                     elif choice_button_rect_3.collidepoint(mouse_pos):  # если нажимают на "выбрать" в третьей клетке выбора
-                        selected_characters.append(current_image_3)
+                        selected_characters.append(characters_of_choice[current_image_3])  # добавление 3 персонажа в список выбора
+                        selection_button_flag3 = True
                         selection_button_3 = False
                         selection_button_4 = True
+                        selection_finish_3 = True
+                        del characters_of_choice[current_image_3]  # удаление выбранного персонажа из общего списка
+
                 if selection_button_4:
                     if left_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "<-" в четвёртой клетке выбора
                         current_image_4 -= 1
@@ -179,8 +225,12 @@ if __name__ == '__main__':
                         if current_image_4 >= len(characters_of_choice):
                             current_image_4 = 0
                     elif choice_button_rect_4.collidepoint(mouse_pos):  # если нажимают на "выбрать" в четвёртой клетке
-                        selected_characters.append(current_image_4)
-                        selection_button_4 = True
+                        selected_characters.append(characters_of_choice[current_image_4])  # добавление 4 персонажа в список выбора
+                        selection_button_flag4 = True
+                        selection_button_4 = False
+                        selection_finish_4 = True
+                        del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
+
 
     print(selected_characters)
 
