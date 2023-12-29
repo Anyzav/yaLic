@@ -35,6 +35,13 @@ if __name__ == '__main__':
     enemies_of_choice = [pygame.image.load('злодей1/1.png'), pygame.image.load('злодей2/1.png'),
                          pygame.image.load('злодей3/1.png'), pygame.image.load('злодей4/1.png')]  # список врагов
 
+    to_attack = [pygame.image.load('перс1/для атаки/1.png'), pygame.image.load('перс2/для атаки/1.png'),
+                 pygame.image.load('перс3/для атаки/1.png'), pygame.image.load('перс4/для атаки/1.png'),
+                 pygame.image.load('перс5/для атаки/1.png'), pygame.image.load('перс6/для атаки/1.png'),
+                 pygame.image.load('перс7/для атаки/1.png'), pygame.image.load('перс8/для атаки/1.png')]
+
+    to_attack_enemy = [pygame.image.load('злодей1/для атаки/1.png')]
+
     selected_characters = []  # список выбранных персонажей
 
     finish = pygame.image.load('галочка.png')  # галочка
@@ -243,6 +250,10 @@ if __name__ == '__main__':
                         selection_finish_4 = True
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
 
+
+                    if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
+                        screen.blit(to_attack[0], (951, 141))
+                        screen.blit(to_attack_enemy[0], (515, 45))
 
     print(selected_characters)
 
