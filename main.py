@@ -94,6 +94,10 @@ if __name__ == '__main__':
                 pygame.image.load('перс8/для атаки/5.png'), pygame.image.load('перс8/для атаки/6.png'),
                 pygame.image.load('перс8/для атаки/7.png'), pygame.image.load('перс8/для атаки/8.png')]
 
+    kill = [pygame.image.load('анимация удара/1.png'), pygame.image.load('анимация удара/2.png'),
+            pygame.image.load('анимация удара/3.png'), pygame.image.load('анимация удара/4.png'),
+            pygame.image.load('анимация удара/5.png')]
+
     list_to_attack_characters = {character_1: attack_1, character_2: attack_2, character_3: attack_3,
                                  character_4: attack_4, character_5: attack_5, character_6: attack_6,
                                  character_7: attack_7, character_8: attack_8}
@@ -201,6 +205,7 @@ if __name__ == '__main__':
     screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
 
     count_anim = 0
+    count_kill = 0
     run = False
     run_flag = 0
 
@@ -216,8 +221,14 @@ if __name__ == '__main__':
                     run_flag == 1
                 else:
                     count_anim += 1
+
+                if count_kill == len(kill) - 1:
+                    run_flag == 1
+                else:
+                    count_kill += 1
                 screen.blit(sc, (484, 14))
                 screen.blit(to_attack_enemy[0], (515, 45))
+                screen.blit(kill[count_kill], (753, 168))
                 screen.blit(list_to_attack_characters[selected_characters[0]][count_anim], (951, 141))
             clock.tick(7)
 
