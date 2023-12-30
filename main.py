@@ -166,8 +166,10 @@ if __name__ == '__main__':
             count_anim = 0
         else:
             count_anim += 1
+        screen.blit(sc, (484, 14))
 
         screen.blit(attack_1[count_anim], (951, 141))
+
 
         pygame.display.update()
         screen.blit(characters_of_choice_1[current_image_5], (15, 419))
