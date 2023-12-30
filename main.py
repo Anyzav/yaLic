@@ -155,21 +155,22 @@ if __name__ == '__main__':
     screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
 
     count_anim = 0
+    run = False
 
     clock = pygame.time.Clock()
 
 
     flag = True
     while flag:
-
         if count_anim == 6:
             count_anim = 0
         else:
             count_anim += 1
-        screen.blit(sc, (484, 14))
 
-        screen.blit(attack_1[count_anim], (951, 141))
-
+        if run:
+            screen.blit(sc, (484, 14))
+            screen.blit(to_attack_enemy[0], (515, 45))
+            screen.blit(attack_1[count_anim], (951, 141))
 
         pygame.display.update()
         screen.blit(characters_of_choice_1[current_image_5], (15, 419))
@@ -282,7 +283,7 @@ if __name__ == '__main__':
                         selection_finish_4 = True
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
-                        screen.blit(to_attack_enemy[0], (515, 45))
+                        run = True
         clock.tick(5)
 
     print(selected_characters)
