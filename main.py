@@ -160,19 +160,6 @@ if __name__ == '__main__':
     screen.blit(text2, (372, 230))
     screen.blit(text3, (450, 230))
 
-    pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
-    f4 = pygame.font.Font(None, 25)
-    text1 = f4.render('УЛУЧШИТЬ', True, (245, 255, 255))
-    screen.blit(text1, (355, 615))
-
-    left_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (27, 429, 47, 30))  # конпка улучшить
-    right_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (410, 429, 47, 30))
-    f5 = pygame.font.Font(None, 42)
-    f6 = pygame.font.Font(None, 42)
-    text1 = f5.render('<-', True, (245, 255, 255))
-    text2 = f6.render('->', True, (245, 255, 255))
-    screen.blit(text1, (38, 429))
-    screen.blit(text2, (419, 429))
 
     current_image_1 = 0
     current_image_2 = 0
@@ -215,6 +202,20 @@ if __name__ == '__main__':
     flag = True
     while flag:
 
+        pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
+        f4 = pygame.font.Font(None, 25)
+        text1 = f4.render('УЛУЧШИТЬ', True, (245, 255, 255))
+        screen.blit(text1, (355, 615))
+
+        left_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (27, 429, 47, 30))  # конпка улучшить
+        right_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (410, 429, 47, 30))
+        f5 = pygame.font.Font(None, 42)
+        f6 = pygame.font.Font(None, 42)
+        text1 = f5.render('<-', True, (245, 255, 255))
+        text2 = f6.render('->', True, (245, 255, 255))
+        screen.blit(text1, (38, 429))
+        screen.blit(text2, (419, 429))
+
         if run:
             if run_flag == 0:
                 if count_anim == len(list_to_attack_characters[selected_characters[0]]) - 1:
@@ -233,7 +234,7 @@ if __name__ == '__main__':
             clock.tick(7)
 
         pygame.display.update()
-        screen.blit(characters_of_choice_1[current_image_5], (15, 419))
+        screen.blit(characters_of_choice_1[current_image_5], (122, 419))
         if selection_button_flag1:
             screen.blit(selected_characters[0], (19, 254))  # выводим изображение из списка выбранных персонажей
         else:
