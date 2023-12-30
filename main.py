@@ -32,6 +32,11 @@ if __name__ == '__main__':
                             pygame.image.load('перс5/1.png'), pygame.image.load('перс6/1.png'),
                             pygame.image.load('перс7/1.png'), pygame.image.load('перс8/1.png')]  # список персонажей
 
+    characters_of_choice_1 = [pygame.image.load('перс1/2.png'), pygame.image.load('перс2/2.png'),
+                            pygame.image.load('перс3/2.png'), pygame.image.load('перс4/2.png'),
+                            pygame.image.load('перс5/2.png'), pygame.image.load('перс6/2.png'),
+                            pygame.image.load('перс7/2.png'), pygame.image.load('перс8/2.png')]
+
     enemies_of_choice = [pygame.image.load('злодей1/1.png'), pygame.image.load('злодей2/1.png'),
                          pygame.image.load('злодей3/1.png'), pygame.image.load('злодей4/1.png')]  # список врагов
 
@@ -60,8 +65,6 @@ if __name__ == '__main__':
     screen.blit(text3, (97, 230))
 
 
-    sc = pygame.image.load('перс1/2.png')
-    screen.blit(sc, (15, 419))
 
     choice_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (124, 388, 117, 19))  # вторая клетка выбора
     left_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (124, 232, 28, 17))
@@ -107,8 +110,8 @@ if __name__ == '__main__':
     text1 = f4.render('УЛУЧШИТЬ', True, (245, 255, 255))
     screen.blit(text1, (355, 615))
 
-    pygame.draw.rect(screen, (107, 66, 189), (27, 429, 47, 30))  # конпка улучшить
-    pygame.draw.rect(screen, (107, 66, 189), (410, 429, 47, 30))
+    left_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (27, 429, 47, 30))  # конпка улучшить
+    right_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (410, 429, 47, 30))
     f5 = pygame.font.Font(None, 42)
     f6 = pygame.font.Font(None, 42)
     text1 = f5.render('<-', True, (245, 255, 255))
@@ -120,6 +123,7 @@ if __name__ == '__main__':
     current_image_2 = 0
     current_image_3 = 0
     current_image_4 = 0
+    current_image_5 = 0
 
 
     selection_button_1 = True  # флаги разрешение на тыкание кнопок
@@ -149,6 +153,7 @@ if __name__ == '__main__':
     flag = True
     while flag:
         pygame.display.update()
+        screen.blit(characters_of_choice_1[current_image_5], (15, 419))
         if selection_button_flag1:
             screen.blit(selected_characters[0], (19, 254))  # выводим изображение из списка выбранных персонажей
         else:
@@ -183,6 +188,14 @@ if __name__ == '__main__':
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
+                if left_button_rect_5.collidepoint(mouse_pos):
+                    current_image_5 -= 1
+                    if current_image_5 < 0:
+                        current_image_5 = len(characters_of_choice_1) - 1
+                elif right_button_rect_5.collidepoint(mouse_pos):
+                    current_image_5 += 1
+                    if current_image_5 >= len(characters_of_choice_1):
+                        current_image_5 = 0
                 if selection_button_1:
                     if left_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "<-" в первой клетке выбора
                         current_image_1 -= 1
@@ -249,8 +262,6 @@ if __name__ == '__main__':
                         selection_button_4 = False
                         selection_finish_4 = True
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
-
-
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         screen.blit(to_attack[0], (951, 141))
                         screen.blit(to_attack_enemy[0], (515, 45))
