@@ -58,11 +58,14 @@ if __name__ == '__main__':
                 pygame.image.load('перс1/для атаки/7.png')]
 
     attack_2 = [pygame.image.load('перс2/для атаки/1.png'), pygame.image.load('перс2/для атаки/2.png'),
-                pygame.image.load('перс2/для атаки/3.png'), pygame.image.load('перс2/для атаки/4.png')]
+                pygame.image.load('перс2/для атаки/3.png'), pygame.image.load('перс2/для атаки/4.png'),
+                pygame.image.load('перс2/для атаки/5.png')]
 
     attack_3 = [pygame.image.load('перс3/для атаки/1.png'), pygame.image.load('перс3/для атаки/2.png'),
                 pygame.image.load('перс3/для атаки/3.png'), pygame.image.load('перс3/для атаки/4.png'),
-                pygame.image.load('перс3/для атаки/5.png')]
+                pygame.image.load('перс3/для атаки/5.png'), pygame.image.load('перс3/для атаки/6.png'),
+                pygame.image.load('перс3/для атаки/7.png'), pygame.image.load('перс3/для атаки/8.png'),
+                pygame.image.load('перс3/для атаки/9.png')]
 
     attack_4 = [pygame.image.load('перс4/для атаки/1.png'), pygame.image.load('перс4/для атаки/2.png'),
                 pygame.image.load('перс4/для атаки/3.png'), pygame.image.load('перс4/для атаки/4.png'),
@@ -70,17 +73,26 @@ if __name__ == '__main__':
 
     attack_5 = [pygame.image.load('перс5/для атаки/1.png'), pygame.image.load('перс5/для атаки/2.png'),
                 pygame.image.load('перс5/для атаки/3.png'), pygame.image.load('перс5/для атаки/4.png'),
-                pygame.image.load('перс5/для атаки/5.png'), pygame.image.load('перс5/для атаки/6.png')]
+                pygame.image.load('перс5/для атаки/5.png'), pygame.image.load('перс5/для атаки/6.png'),
+                pygame.image.load('перс5/для атаки/7.png'), pygame.image.load('перс5/для атаки/8.png'),
+                pygame.image.load('перс5/для атаки/9.png'), pygame.image.load('перс5/для атаки/10.png')]
 
     attack_6 = [pygame.image.load('перс6/для атаки/1.png'), pygame.image.load('перс6/для атаки/2.png'),
                 pygame.image.load('перс6/для атаки/3.png'), pygame.image.load('перс6/для атаки/4.png'),
-                pygame.image.load('перс6/для атаки/5.png'), pygame.image.load('перс6/для атаки/6.png')]
+                pygame.image.load('перс6/для атаки/5.png'), pygame.image.load('перс6/для атаки/6.png'),
+                pygame.image.load('перс6/для атаки/7.png'), pygame.image.load('перс6/для атаки/8.png'),
+                pygame.image.load('перс6/для атаки/9.png'), pygame.image.load('перс6/для атаки/10.png'),
+                pygame.image.load('перс6/для атаки/11.png')]
 
     attack_7 = [pygame.image.load('перс7/для атаки/1.png'), pygame.image.load('перс7/для атаки/2.png'),
-                pygame.image.load('перс7/для атаки/3.png'), pygame.image.load('перс7/для атаки/4.png')]
+                pygame.image.load('перс7/для атаки/3.png'), pygame.image.load('перс7/для атаки/4.png'),
+                pygame.image.load('перс7/для атаки/5.png'), pygame.image.load('перс7/для атаки/6.png'),
+                pygame.image.load('перс7/для атаки/7.png'), pygame.image.load('перс7/для атаки/8.png')]
 
     attack_8 = [pygame.image.load('перс8/для атаки/1.png'), pygame.image.load('перс8/для атаки/2.png'),
-                pygame.image.load('перс8/для атаки/3.png'), pygame.image.load('перс8/для атаки/4.png')]
+                pygame.image.load('перс8/для атаки/3.png'), pygame.image.load('перс8/для атаки/4.png'),
+                pygame.image.load('перс8/для атаки/5.png'), pygame.image.load('перс8/для атаки/6.png'),
+                pygame.image.load('перс8/для атаки/7.png'), pygame.image.load('перс8/для атаки/8.png')]
 
     list_to_attack_characters = {character_1: attack_1, character_2: attack_2, character_3: attack_3,
                                  character_4: attack_4, character_5: attack_5, character_6: attack_6,
