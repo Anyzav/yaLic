@@ -37,6 +37,11 @@ if __name__ == '__main__':
     character_7 = pygame.image.load('перс7/1.png')
     character_8 = pygame.image.load('перс8/1.png')
 
+    enemy_1 = pygame.image.load('злодей1/1.png')
+    enemy_2 = pygame.image.load('злодей2/1.png')
+    enemy_3 = pygame.image.load('злодей3/1.png')
+    enemy_4 = pygame.image.load('злодей4/1.png')
+
     characters_of_choice = [character_1, character_2, character_3, character_4, character_5,
                             character_6, character_7, character_8]  # список персонажей
 
@@ -45,8 +50,7 @@ if __name__ == '__main__':
                             pygame.image.load('перс5/2.png'), pygame.image.load('перс6/2.png'),
                             pygame.image.load('перс7/2.png'), pygame.image.load('перс8/2.png')]
 
-    enemies_of_choice = [pygame.image.load('злодей1/1.png'), pygame.image.load('злодей2/1.png'),
-                         pygame.image.load('злодей3/1.png'), pygame.image.load('злодей4/1.png')]  # список врагов
+    enemies_of_choice = [enemy_1, enemy_2, enemy_3, enemy_4]  # список врагов
 
     to_attack = [pygame.image.load('перс1/для атаки/1.png'), pygame.image.load('перс2/для атаки/1.png'),
                  pygame.image.load('перс3/для атаки/1.png'), pygame.image.load('перс4/для атаки/1.png'),
@@ -95,6 +99,26 @@ if __name__ == '__main__':
                 pygame.image.load('перс8/для атаки/5.png'), pygame.image.load('перс8/для атаки/6.png'),
                 pygame.image.load('перс8/для атаки/7.png'), pygame.image.load('перс8/для атаки/8.png')]
 
+    attack_enemy_1 = [pygame.image.load('злодей1/для атаки/1.png'), pygame.image.load('злодей1/для атаки/2.png'),
+                      pygame.image.load('злодей1/для атаки/3.png'), pygame.image.load('злодей1/для атаки/4.png'),
+                      pygame.image.load('злодей1/для атаки/5.png'), pygame.image.load('злодей1/для атаки/6.png'),
+                      pygame.image.load('злодей1/для атаки/7.png')]
+
+    attack_enemy_2 = [pygame.image.load('злодей2/для атаки/1.png'), pygame.image.load('злодей2/для атаки/2.png'),
+                      pygame.image.load('злодей2/для атаки/3.png'), pygame.image.load('злодей2/для атаки/4.png'),
+                      pygame.image.load('злодей2/для атаки/5.png'), pygame.image.load('злодей2/для атаки/6.png'),
+                      pygame.image.load('злодей2/для атаки/7.png')]
+
+    attack_enemy_3 = [pygame.image.load('злодей3/для атаки/1.png'), pygame.image.load('злодей3/для атаки/2.png'),
+                      pygame.image.load('злодей3/для атаки/3.png'), pygame.image.load('злодей3/для атаки/4.png'),
+                      pygame.image.load('злодей3/для атаки/5.png'), pygame.image.load('злодей3/для атаки/6.png'),
+                      pygame.image.load('злодей3/для атаки/7.png')]
+
+    attack_enemy_4 = [pygame.image.load('злодей4/для атаки/1.png'), pygame.image.load('злодей4/для атаки/2.png'),
+                      pygame.image.load('злодей4/для атаки/3.png'), pygame.image.load('злодей4/для атаки/4.png'),
+                      pygame.image.load('злодей4/для атаки/5.png'), pygame.image.load('злодей4/для атаки/6.png'),
+                      pygame.image.load('злодей4/для атаки/7.png')]
+
     kill = [pygame.image.load('анимация удара/1.png'), pygame.image.load('анимация удара/2.png'),
             pygame.image.load('анимация удара/3.png'), pygame.image.load('анимация удара/4.png'),
             pygame.image.load('анимация удара/5.png')]
@@ -103,7 +127,8 @@ if __name__ == '__main__':
                                  character_4: attack_4, character_5: attack_5, character_6: attack_6,
                                  character_7: attack_7, character_8: attack_8}
 
-    to_attack_enemy = [pygame.image.load('злодей1/для атаки/1.png')]
+    to_attack_enemy = {enemy_1: attack_enemy_1, enemy_2: attack_enemy_2, enemy_3: attack_enemy_3,
+                       enemy_4: attack_enemy_4}
 
     selected_characters = []  # список выбранных персонажей
 
@@ -255,9 +280,14 @@ if __name__ == '__main__':
                 else:
                     count_kill += 1
                 screen.blit(sc, (484, 14))
-                screen.blit(to_attack_enemy[0], (515, 45))
                 screen.blit(kill[count_kill], (753, 168))
                 screen.blit(list_to_attack_characters[selected_characters[0]][count_anim], (951, 141))
+                if displaying_enemies_on_the_screen[0] == enemy_1 or displaying_enemies_on_the_screen[0] == enemy_2:
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_anim], (515, 45))
+                elif displaying_enemies_on_the_screen[0] == enemy_3:
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_anim], (500, 50))
+                elif displaying_enemies_on_the_screen[0] == enemy_4:
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_anim], (500, 100))
             clock.tick(7)
 
         pygame.display.update()
