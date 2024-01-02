@@ -160,6 +160,8 @@ if __name__ == '__main__':
     list_name = []  # список имён персонажей
     list_hp = []  # список жизней персонажей
     list_attack_power = []  # список силы атаки персонажей
+    list_raising_HP = []  # список повышения единиц жизней
+    list_raising_attack = []  # список повышения единиц силы атаки
 
     con = sqlite3.connect('characterization.sqlite')  # подключаем БД
     cur = con.cursor()
@@ -168,8 +170,9 @@ if __name__ == '__main__':
         list_name.append(elem[1])
         list_hp.append(elem[2])
         list_attack_power.append(elem[3])
+        list_raising_HP.append(elem[4])
+        list_raising_attack.append(elem[5])
 
-    con.close()
 
     f7 = pygame.font.Font(None, 18)  # для вывода на экран характеристик
 
@@ -215,7 +218,7 @@ if __name__ == '__main__':
     flag = True
     while flag:
 
-        pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
+        level_up = pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
         f4 = pygame.font.Font(None, 25)
         text1 = f4.render('УЛУЧШИТЬ', True, (245, 255, 255))
         screen.blit(text1, (355, 615))
@@ -293,6 +296,14 @@ if __name__ == '__main__':
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
+
+                if level_up.collidepoint(mouse_pos):
+                    # sql_update_query = """Update pers set Attack_power = 10000 where id = 4"""
+                    # cur.execute(sql_update_query)
+                    # con.commit()
+                    list_hp[current_image_5] = str(int(list_hp[current_image_5]) + int(list_raising_HP[current_image_5]))
+                    list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
+
                 if left_button_rect_5.collidepoint(mouse_pos):
                     current_image_5 -= 1
                     if current_image_5 < 0:
@@ -301,6 +312,7 @@ if __name__ == '__main__':
                     current_image_5 += 1
                     if current_image_5 >= len(characters_of_choice_1):
                         current_image_5 = 0
+
                 if selection_button_1:
                     if left_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "<-" в первой клетке выбора
                         current_image_1 -= 1
@@ -374,3 +386,4 @@ if __name__ == '__main__':
     print(selected_characters)
 
     pygame.quit()
+    con.close()
