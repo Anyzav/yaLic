@@ -2,6 +2,7 @@ import os
 import sys
 import random
 import pygame
+import sqlite3
 
 if __name__ == '__main__':
     pygame.init()
@@ -113,10 +114,9 @@ if __name__ == '__main__':
     right_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
-    f3 = pygame.font.Font(None, 27)
     text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
     text2 = f2.render('<-', True, (255, 255, 255))
-    text3 = f3.render('->', True, (255, 255, 255))
+    text3 = f2.render('->', True, (255, 255, 255))
     screen.blit(text1, (30, 390))
     screen.blit(text2, (22, 230))
     screen.blit(text3, (97, 230))
@@ -126,10 +126,9 @@ if __name__ == '__main__':
     right_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (213, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
-    f3 = pygame.font.Font(None, 27)
     text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
     text2 = f2.render('<-', True, (255, 255, 255))
-    text3 = f3.render('->', True, (255, 255, 255))
+    text3 = f2.render('->', True, (255, 255, 255))
     screen.blit(text1, (145, 390))
     screen.blit(text2, (130, 230))
     screen.blit(text3, (220, 230))
@@ -139,10 +138,9 @@ if __name__ == '__main__':
     right_button_rect_3 = pygame.draw.rect(screen, (246, 143, 255), (334, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
-    f3 = pygame.font.Font(None, 27)
     text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
     text2 = f2.render('<-', True, (255, 255, 255))
-    text3 = f3.render('->', True, (255, 255, 255))
+    text3 = f2.render('->', True, (255, 255, 255))
     screen.blit(text1, (265, 390))
     screen.blit(text2, (251, 230))
     screen.blit(text3, (340, 230))
@@ -152,13 +150,28 @@ if __name__ == '__main__':
     right_button_rect_4 = pygame.draw.rect(screen, (246, 143, 255), (445, 232, 28, 17))
     f1 = pygame.font.Font(None, 22)
     f2 = pygame.font.Font(None, 27)
-    f3 = pygame.font.Font(None, 27)
     text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
     text2 = f2.render('<-', True, (255, 255, 255))
-    text3 = f3.render('->', True, (255, 255, 255))
+    text3 = f2.render('->', True, (255, 255, 255))
     screen.blit(text1, (380, 390))
     screen.blit(text2, (372, 230))
     screen.blit(text3, (450, 230))
+
+    list_name = []  # список имён персонажей
+    list_hp = []  # список жизней персонажей
+    list_attack_power = []  # список силы атаки персонажей
+
+    con = sqlite3.connect('characterization.sqlite')  # подключаем БД
+    cur = con.cursor()
+    result = cur.execute("""SELECT * FROM pers""").fetchall()
+    for elem in result:
+        list_name.append(elem[1])
+        list_hp.append(elem[2])
+        list_attack_power.append(elem[3])
+
+    con.close()
+
+    f7 = pygame.font.Font(None, 18)  # для вывода на экран характеристик
 
 
     current_image_1 = 0
@@ -216,6 +229,17 @@ if __name__ == '__main__':
         screen.blit(text1, (38, 429))
         screen.blit(text2, (419, 429))
 
+        pygame.draw.rect(screen, (107, 66, 189), (25, 468, 115, 71))  # вывод на экран характеристик
+        name = list_name[current_image_5]
+        hp = list_hp[current_image_5]
+        attack_power = list_attack_power[current_image_5]
+        text1 = f7.render(f'Имя: {name}', True, (255, 255, 255))
+        screen.blit(text1, (30, 478))
+        text1 = f7.render(f'HP: {hp}', True, (255, 255, 255))
+        screen.blit(text1, (30, 498))
+        text1 = f7.render(f'Сила атаки: {attack_power}', True, (255, 255, 255))
+        screen.blit(text1, (30, 518))
+
         if run:
             if run_flag == 0:
                 if count_anim == len(list_to_attack_characters[selected_characters[0]]) - 1:
@@ -234,7 +258,7 @@ if __name__ == '__main__':
             clock.tick(7)
 
         pygame.display.update()
-        screen.blit(characters_of_choice_1[current_image_5], (122, 419))
+        screen.blit(characters_of_choice_1[current_image_5], (152, 419))
         if selection_button_flag1:
             screen.blit(selected_characters[0], (19, 254))  # выводим изображение из списка выбранных персонажей
         else:
