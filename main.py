@@ -234,6 +234,7 @@ if __name__ == '__main__':
 
     count_anim = 0
     count_kill = 0
+    count_enemy = 0
     run = False
     run_flag = 0
 
@@ -270,11 +271,12 @@ if __name__ == '__main__':
 
         if run:
             if run_flag == 0:
-                if count_anim == len(list_to_attack_characters[selected_characters[0]]) - 1:
+                if count_anim == len(list_to_attack_characters[selected_characters[0]]) - 1 and count_enemy == len(to_attack_enemy[displaying_enemies_on_the_screen[0]]):
                     run_flag == 1
-                else:
+                if count_anim != len(list_to_attack_characters[selected_characters[0]]) - 1:
                     count_anim += 1
-
+                if count_enemy != len(to_attack_enemy[displaying_enemies_on_the_screen[0]]) - 1:
+                    count_enemy += 1
                 if count_kill == len(kill) - 1:
                     run_flag == 1
                 else:
@@ -283,11 +285,11 @@ if __name__ == '__main__':
                 screen.blit(kill[count_kill], (753, 168))
                 screen.blit(list_to_attack_characters[selected_characters[0]][count_anim], (951, 141))
                 if displaying_enemies_on_the_screen[0] == enemy_1 or displaying_enemies_on_the_screen[0] == enemy_2:
-                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_anim], (515, 45))
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (515, 45))
                 elif displaying_enemies_on_the_screen[0] == enemy_3:
-                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_anim], (500, 50))
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 50))
                 elif displaying_enemies_on_the_screen[0] == enemy_4:
-                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_anim], (500, 100))
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 100))
             clock.tick(7)
 
         pygame.display.update()
