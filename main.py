@@ -9,6 +9,8 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode((1280, 650))
     screen.fill((0, 0, 0))
     pygame.display.set_caption("Game")
+    pygame.mixer.music.load("445a6d5c5c7fd4d.mp3")
+    pygame.mixer.music.play(-1)
     pygame.draw.rect(screen, (230, 230, 250), (13, 12, 462, 23))  # имя, уровень, выйти из аккаунта
     pygame.draw.rect(screen, (220, 20, 60), (13, 42, 462, 183), 2)  # враги
     pygame.draw.line(screen, (220, 20, 60), [121, 42], [121, 224], 2)
@@ -239,6 +241,7 @@ if __name__ == '__main__':
     run_flag = 0
 
     clock = pygame.time.Clock()
+    FPS = 60
 
     all_sprites = pygame.sprite.Group()
 
@@ -248,7 +251,7 @@ if __name__ == '__main__':
         def __init__(self, radius, x, y):
             super().__init__(all_sprites)
             self.radius = radius
-            self.x = 500
+            self.x = 700
             self.y = 500
             self.image = pygame.image.load('круг.png')
             self.rect = pygame.Rect(self.x, self.y, 2 * radius, 2 * radius)
@@ -470,6 +473,7 @@ if __name__ == '__main__':
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         run = True
+        clock.tick(FPS)
 
 
     print(selected_characters)
