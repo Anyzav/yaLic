@@ -240,9 +240,66 @@ if __name__ == '__main__':
 
     clock = pygame.time.Clock()
 
+    all_sprites = pygame.sprite.Group()
+
+    basket = pygame.image.load('корзинка.png')
+
+    class Ball(pygame.sprite.Sprite):
+        def __init__(self, radius, x, y):
+            super().__init__(all_sprites)
+            self.radius = radius
+            self.x = 500
+            self.y = 500
+            self.image = pygame.image.load('круг.png')
+            self.rect = pygame.Rect(self.x, self.y, 2 * radius, 2 * radius)
+            self.vx = random.randint(-5, 5)
+            self.vy = random.randrange(-5, 5)
+
+        def update(self):
+            if pygame.sprite.spritecollideany(self, horizontal_borders):
+                self.vy = -self.vy
+            if pygame.sprite.spritecollideany(self, vertical_borders):
+                self.vx = -self.vx
+            self.rect = self.rect.move(self.vx, self.vy)
+
+            self.x += self.vx
+            self.y += self.vy
+
+    horizontal_borders = pygame.sprite.Group()
+    vertical_borders = pygame.sprite.Group()
+
+    class Border(pygame.sprite.Sprite):
+        def __init__(self, x1, y1, x2, y2):
+            super().__init__(all_sprites)
+            if x2 == x1:  # вертикальная стенка
+                self.add(vertical_borders)
+                self.image = pygame.Surface([1, y2 - y1])
+                self.rect = pygame.Rect(x1, y1, 1, y2 - y1)
+            else:  # горизонтальная стенка
+                self.add(horizontal_borders)
+                self.image = pygame.Surface([x2 - x1, 1])
+                self.rect = pygame.Rect(x1, y1, x2 - x1, 1)
+
+    Border(495, 425, 1040, 425)
+    Border(495, 425, 495, 620)
+    Border(1040, 425, 1040, 620)
+    Border(495, 620, 1040, 620)
+
+    circles = []
+
+    for i in range(12):
+        circles.append(Ball(20, 100, 100))
+
+    current_image = 0
+
 
     flag = True
     while flag:
+        screen.blit(basket, (484, 421))
+        for i in circles:
+            i.update()
+            all_sprites.draw(screen)
+
 
         level_up = pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
         f4 = pygame.font.Font(None, 25)
