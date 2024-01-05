@@ -257,7 +257,7 @@ if __name__ == '__main__':
             self.image = pygame.image.load('круг.png')
             self.rect = pygame.Rect(self.x, self.y, 2 * radius, 2 * radius)
             self.vx = random.randint(-5, 5)
-            self.vy = random.randrange(-5, 5)
+            self.vy = random.randint(-5, 5)
 
         def update(self):
             if pygame.sprite.spritecollideany(self, horizontal_borders):
@@ -306,29 +306,31 @@ if __name__ == '__main__':
     first_x1 = False
     second_x = False
     second_x1 = False
+    block_run = False
 
     flag = True
     while flag:
-        if first_x:
-            x += 440
-            first_x = False
-        elif first_x1:
-            x1 += 440
-            first_x1 = False
-        elif second_x:
-            x1 -= 450
-            second_x = False
-        elif second_x1:
-            x -= 450
-            second_x1 = False
-        screen.blit(basket, (484, 421))
-        if bottom:
-            screen.blit(block, (x, y))
-        elif top:
-            screen.blit(block, (x1, y1))
-        for i in circles:
-            i.update()
-            all_sprites.draw(screen)
+        if block_run:
+            if first_x:
+                x += 440
+                first_x = False
+            elif first_x1:
+                x1 += 440
+                first_x1 = False
+            elif second_x:
+                x1 -= 450
+                second_x = False
+            elif second_x1:
+                x -= 450
+                second_x1 = False
+            screen.blit(basket, (484, 421))
+            if bottom:
+                screen.blit(block, (x, y))
+            elif top:
+                screen.blit(block, (x1, y1))
+            for i in circles:
+                i.update()
+                all_sprites.draw(screen)
 
 
         level_up = pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
@@ -377,7 +379,6 @@ if __name__ == '__main__':
                     screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 50))
                 elif displaying_enemies_on_the_screen[0] == enemy_4:
                     screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 100))
-            clock.tick(7)
 
         pygame.display.update()
         screen.blit(characters_of_choice_1[current_image_5], (152, 419))
@@ -413,35 +414,33 @@ if __name__ == '__main__':
                 flag = False
 
             keys = pygame.key.get_pressed()
-
-            if bottom:
-                if keys[pygame.K_a] and x >= 488:
-                    x -= 11
-                elif keys[pygame.K_d] and x <= 990:
-                    x += 11
-                    print(x)
-                if x <= 488:
-                    bottom = False
-                    top = True
-                    first_x1 = True
-                elif x >= 990:
-                    bottom = False
-                    top = True
-                    second_x1 = True
-            elif top:
-                if keys[pygame.K_a] and x1 >= 488:
-                    x1 -= 10
-                elif keys[pygame.K_d] and x1 <= 990:
-                    x1 += 10
-                    print(x1)
-                if x1 <= 488:
-                    bottom = True
-                    top = False
-                    first_x = True
-                elif x1 >= 990:
-                    bottom = True
-                    top = False
-                    second_x = True
+            if block_run:
+                if bottom:
+                    if keys[pygame.K_a] and x >= 488:
+                        x -= 11
+                    elif keys[pygame.K_d] and x <= 990:
+                        x += 11
+                    if x <= 488:
+                        bottom = False
+                        top = True
+                        first_x1 = True
+                    elif x >= 990:
+                        bottom = False
+                        top = True
+                        second_x1 = True
+                elif top:
+                    if keys[pygame.K_a] and x1 >= 488:
+                        x1 -= 10
+                    elif keys[pygame.K_d] and x1 <= 990:
+                        x1 += 10
+                    if x1 <= 488:
+                        bottom = True
+                        top = False
+                        first_x = True
+                    elif x1 >= 990:
+                        bottom = True
+                        top = False
+                        second_x = True
 
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -531,6 +530,7 @@ if __name__ == '__main__':
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         run = True
+                        block_run = True
 
 
     print(selected_characters)
