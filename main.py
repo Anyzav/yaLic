@@ -23,7 +23,6 @@ if __name__ == '__main__':
     pygame.draw.rect(screen, (72, 61, 139), (13, 415, 462, 226), 2)  # описание персонажа
     pygame.draw.rect(screen, (139, 0, 0), (482, 12, 787, 398), 2)  # поле боя
     pygame.draw.rect(screen, (75, 0, 130), (482, 419, 571, 219), 2)  # корзинка
-    pygame.draw.rect(screen, (75, 0, 130), (1063, 457, 60, 51), 2)  # набор очков атаки
     pygame.draw.circle(screen, (244, 164, 96), (1199, 485), 63, 2)  # магазин
     pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43), 2)
 
@@ -246,10 +245,9 @@ if __name__ == '__main__':
     all_sprites = pygame.sprite.Group()
 
     basket = pygame.image.load('корзинка.png')
-    block = pygame.image.load('блок.png')
 
     class Ball(pygame.sprite.Sprite):
-        def __init__(self, radius, x, y):
+        def __init__(self, radius):
             super().__init__(all_sprites)
             self.radius = radius
             self.x = 700
@@ -268,6 +266,15 @@ if __name__ == '__main__':
 
             self.x += self.vx
             self.y += self.vy
+
+
+            mouse_pos = pygame.mouse.get_pos()
+            mouse_clicked = pygame.mouse.get_pressed()[0]
+            if self.rect.collidepoint(*mouse_pos) and mouse_clicked:
+                self.kill()
+                pygame.draw.rect(screen, (75, 0, 130), (1063, 457, 60, 51))
+                text1 = f8.render(str(round((12 - len(all_sprites.sprites()) + 4) * 100 / 12)), True, (245, 255, 255))
+                screen.blit(text1, (1065, 466))
 
     horizontal_borders = pygame.sprite.Group()
     vertical_borders = pygame.sprite.Group()
@@ -292,46 +299,22 @@ if __name__ == '__main__':
     circles = []
 
     for i in range(12):
-        circles.append(Ball(20, 100, 100))
+        circles.append(Ball(20))
 
     current_image = 0
 
-    bottom = True
-    top = False
-    x = 488
-    y = 621
-    x1 = 498
-    y1 = 421
-    first_x = False
-    first_x1 = False
-    second_x = False
-    second_x1 = False
     block_run = False
+
+    experience = 0
+    f8 = pygame.font.Font(None, 50)
 
     flag = True
     while flag:
         if block_run:
-            if first_x:
-                x += 440
-                first_x = False
-            elif first_x1:
-                x1 += 440
-                first_x1 = False
-            elif second_x:
-                x1 -= 450
-                second_x = False
-            elif second_x1:
-                x -= 450
-                second_x1 = False
             screen.blit(basket, (484, 421))
-            if bottom:
-                screen.blit(block, (x, y))
-            elif top:
-                screen.blit(block, (x1, y1))
             for i in circles:
                 i.update()
                 all_sprites.draw(screen)
-
 
         level_up = pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
         f4 = pygame.font.Font(None, 25)
@@ -412,36 +395,6 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 gameIsRunning = False
                 flag = False
-
-            keys = pygame.key.get_pressed()
-            if block_run:
-                if bottom:
-                    if keys[pygame.K_a] and x >= 488:
-                        x -= 11
-                    elif keys[pygame.K_d] and x <= 990:
-                        x += 11
-                    if x <= 488:
-                        bottom = False
-                        top = True
-                        first_x1 = True
-                    elif x >= 990:
-                        bottom = False
-                        top = True
-                        second_x1 = True
-                elif top:
-                    if keys[pygame.K_a] and x1 >= 488:
-                        x1 -= 10
-                    elif keys[pygame.K_d] and x1 <= 990:
-                        x1 += 10
-                    if x1 <= 488:
-                        bottom = True
-                        top = False
-                        first_x = True
-                    elif x1 >= 990:
-                        bottom = True
-                        top = False
-                        second_x = True
-
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
@@ -531,6 +484,7 @@ if __name__ == '__main__':
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         run = True
                         block_run = True
+        all_sprites.update()
 
 
     print(selected_characters)
