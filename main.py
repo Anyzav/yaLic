@@ -246,6 +246,7 @@ if __name__ == '__main__':
     all_sprites = pygame.sprite.Group()
 
     basket = pygame.image.load('корзинка.png')
+    block = pygame.image.load('блок.png')
 
     class Ball(pygame.sprite.Sprite):
         def __init__(self, radius, x, y):
@@ -295,10 +296,36 @@ if __name__ == '__main__':
 
     current_image = 0
 
+    bottom = True
+    top = False
+    x = 488
+    y = 621
+    x1 = 498
+    y1 = 421
+    first_x = False
+    first_x1 = False
+    second_x = False
+    second_x1 = False
 
     flag = True
     while flag:
+        if first_x:
+            x += 440
+            first_x = False
+        elif first_x1:
+            x1 += 440
+            first_x1 = False
+        elif second_x:
+            x1 -= 450
+            second_x = False
+        elif second_x1:
+            x -= 450
+            second_x1 = False
         screen.blit(basket, (484, 421))
+        if bottom:
+            screen.blit(block, (x, y))
+        elif top:
+            screen.blit(block, (x1, y1))
         for i in circles:
             i.update()
             all_sprites.draw(screen)
@@ -383,8 +410,39 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameIsRunning = False
-                pygame.quit()
                 flag = False
+
+            keys = pygame.key.get_pressed()
+
+            if bottom:
+                if keys[pygame.K_a] and x >= 488:
+                    x -= 11
+                elif keys[pygame.K_d] and x <= 990:
+                    x += 11
+                    print(x)
+                if x <= 488:
+                    bottom = False
+                    top = True
+                    first_x1 = True
+                elif x >= 990:
+                    bottom = False
+                    top = True
+                    second_x1 = True
+            elif top:
+                if keys[pygame.K_a] and x1 >= 488:
+                    x1 -= 10
+                elif keys[pygame.K_d] and x1 <= 990:
+                    x1 += 10
+                    print(x1)
+                if x1 <= 488:
+                    bottom = True
+                    top = False
+                    first_x = True
+                elif x1 >= 990:
+                    bottom = True
+                    top = False
+                    second_x = True
+
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
@@ -473,7 +531,6 @@ if __name__ == '__main__':
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         run = True
-        clock.tick(FPS)
 
 
     print(selected_characters)
