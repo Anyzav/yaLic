@@ -3,6 +3,7 @@ import sys
 import random
 import pygame
 import sqlite3
+import time
 
 if __name__ == '__main__':
     pygame.init()
@@ -237,10 +238,11 @@ if __name__ == '__main__':
     count_kill = 0
     count_enemy = 0
     run = False
-    run_flag = 0
+    run_flag_enemy = False
+    run_flag_character = True
+    stop_image = True
+    run_image = False
 
-    clock = pygame.time.Clock()
-    FPS = 60
 
     all_sprites = pygame.sprite.Group()
 
@@ -272,9 +274,6 @@ if __name__ == '__main__':
             mouse_clicked = pygame.mouse.get_pressed()[0]
             if self.rect.collidepoint(*mouse_pos) and mouse_clicked:
                 self.kill()
-                pygame.draw.rect(screen, (75, 0, 130), (1063, 457, 60, 51))
-                text1 = f8.render(str(round((12 - len(all_sprites.sprites()) + 4) * 100 / 12)), True, (245, 255, 255))
-                screen.blit(text1, (1065, 466))
 
     horizontal_borders = pygame.sprite.Group()
     vertical_borders = pygame.sprite.Group()
@@ -304,17 +303,48 @@ if __name__ == '__main__':
     current_image = 0
 
     block_run = False
+    block_stop_3_s = 0
+
 
     experience = 0
     f8 = pygame.font.Font(None, 50)
 
+    count_time = 0
+
+    def new(e):
+        # global exper
+        # exper = 0
+        pygame.draw.rect(screen, (75, 0, 130), (1063, 457, 60, 51))
+        text1 = f8.render(str(round((12 - len(all_sprites.sprites()) + 4) * 100 / 12)), True, (245, 255, 255))
+        screen.blit(text1, (1065, 466))
+        # exper = e
+
+    def draw_character_anim():
+        screen.blit(sc, (484, 14))
+        pygame.draw.rect(screen, (139, 0, 0), (560, 25, 206, 22))
+        pygame.draw.rect(screen, (139, 0, 0), (941, 61, 206, 22))
+        pygame.draw.rect(screen, (255, 255, 255), (558, 25, 208, 24), 2)
+        pygame.draw.rect(screen, (255, 255, 255), (939, 61, 208, 24), 2)
+        if displaying_enemies_on_the_screen[0] == enemy_1 or displaying_enemies_on_the_screen[0] == enemy_2:
+            screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][0], (515, 45))
+        elif displaying_enemies_on_the_screen[0] == enemy_3:
+            screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][0], (500, 50))
+        elif displaying_enemies_on_the_screen[0] == enemy_4:
+            screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][0], (500, 100))
+
+    def draw_enemy_anim():
+        screen.blit(sc, (484, 14))
+        screen.blit(list_to_attack_characters[selected_characters[0]][0], (951, 141))
+        pygame.draw.rect(screen, (139, 0, 0), (560, 25, 206, 22))
+        pygame.draw.rect(screen, (139, 0, 0), (941, 61, 206, 22))
+        pygame.draw.rect(screen, (255, 255, 255), (558, 25, 208, 24), 2)
+        pygame.draw.rect(screen, (255, 255, 255), (939, 61, 208, 24), 2)
+
+
     flag = True
     while flag:
-        if block_run:
-            screen.blit(basket, (484, 421))
-            for i in circles:
-                i.update()
-                all_sprites.draw(screen)
+        new(experience)
+        # print(exper)
 
         level_up = pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
         f4 = pygame.font.Font(None, 25)
@@ -342,26 +372,62 @@ if __name__ == '__main__':
         screen.blit(text1, (30, 518))
 
         if run:
-            if run_flag == 0:
-                if count_anim == len(list_to_attack_characters[selected_characters[0]]) - 1 and count_enemy == len(to_attack_enemy[displaying_enemies_on_the_screen[0]]):
-                    run_flag == 1
-                if count_anim != len(list_to_attack_characters[selected_characters[0]]) - 1:
-                    count_anim += 1
-                if count_enemy != len(to_attack_enemy[displaying_enemies_on_the_screen[0]]) - 1:
-                    count_enemy += 1
-                if count_kill == len(kill) - 1:
-                    run_flag == 1
-                else:
-                    count_kill += 1
-                screen.blit(sc, (484, 14))
-                screen.blit(kill[count_kill], (753, 168))
-                screen.blit(list_to_attack_characters[selected_characters[0]][count_anim], (951, 141))
+            screen.blit(sc, (484, 14))
+            pygame.draw.rect(screen, (139, 0, 0), (560, 25, 206, 22))
+            pygame.draw.rect(screen, (139, 0, 0), (941, 61, 206, 22))
+            pygame.draw.rect(screen, (255, 255, 255), (558, 25, 208, 24), 2)
+            pygame.draw.rect(screen, (255, 255, 255), (939, 61, 208, 24), 2)
+            if stop_image:
+                screen.blit(list_to_attack_characters[selected_characters[0]][0], (951, 141))
                 if displaying_enemies_on_the_screen[0] == enemy_1 or displaying_enemies_on_the_screen[0] == enemy_2:
-                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (515, 45))
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][0], (515, 45))
                 elif displaying_enemies_on_the_screen[0] == enemy_3:
-                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 50))
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][0], (500, 50))
                 elif displaying_enemies_on_the_screen[0] == enemy_4:
-                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 100))
+                    screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][0], (500, 100))
+                block_run = True
+                block_stop_3_s += 1
+            if run_image:
+                if run_flag_enemy:
+                    draw_enemy_anim()
+                    time.sleep(0.09)
+                    if count_enemy != len(to_attack_enemy[displaying_enemies_on_the_screen[0]]) - 1:
+                        count_enemy += 1
+                    if count_enemy == len(list_to_attack_characters[selected_characters[0]]) - 1:
+                        run_flag_enemy = False
+                    # if count_kill == len(kill) - 1:
+                        # run_flag_enemy = False
+                    # else:
+                        # count_kill += 1
+                    # screen.blit(kill[count_kill], (753, 168))
+                    if displaying_enemies_on_the_screen[0] == enemy_1 or displaying_enemies_on_the_screen[0] == enemy_2:
+                        screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (515, 45))
+                    elif displaying_enemies_on_the_screen[0] == enemy_3:
+                        screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 50))
+                    elif displaying_enemies_on_the_screen[0] == enemy_4:
+                        screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[0]][count_enemy], (500, 100))
+                if run_flag_character:
+                    draw_character_anim()
+                    time.sleep(0.09)
+                    if count_anim == len(list_to_attack_characters[selected_characters[0]]) - 1:
+                        run_flag_character = False
+                        run_flag_enemy = True
+                    if count_anim != len(list_to_attack_characters[selected_characters[0]]) - 1:
+                        count_anim += 1
+                    screen.blit(list_to_attack_characters[selected_characters[0]][count_anim], (951, 141))
+
+
+        if block_run:
+            screen.blit(basket, (484, 421))
+            count_time += 1
+            if block_stop_3_s == 1:
+                time.sleep(5)
+            if count_time <= 400:
+                for i in circles:
+                    i.update()
+                    all_sprites.draw(screen)
+            else:
+                run_image = True
 
         pygame.display.update()
         screen.blit(characters_of_choice_1[current_image_5], (152, 419))
@@ -483,11 +549,7 @@ if __name__ == '__main__':
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         run = True
-                        block_run = True
-        all_sprites.update()
 
-
-    print(selected_characters)
 
     pygame.quit()
     con.close()
