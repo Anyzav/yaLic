@@ -192,6 +192,7 @@ if __name__ == '__main__':
     list_attack_power = []  # список силы атаки персонажей
     list_raising_HP = []  # список повышения единиц жизней
     list_raising_attack = []  # список повышения единиц силы атаки
+    list_cost = []  # список стоимосости повышения
 
     list_name_enemy = []  # список имён врагов
     list_hp_enemy = []  # список жизней врагов
@@ -208,6 +209,7 @@ if __name__ == '__main__':
         list_attack_power.append(elem[3])
         list_raising_HP.append(elem[4])
         list_raising_attack.append(elem[5])
+        list_cost.append(elem[6])
 
     result_2 = cur.execute("""SELECT * FROM villains""").fetchall()
     for elem in result_2:
@@ -406,16 +408,19 @@ if __name__ == '__main__':
         screen.blit(text1, (38, 429))
         screen.blit(text2, (419, 429))
 
-        pygame.draw.rect(screen, (107, 66, 189), (25, 468, 115, 71))  # вывод на экран характеристик
+        pygame.draw.rect(screen, (107, 66, 189), (25, 468, 132, 90))  # вывод на экран характеристик
         name = list_name[current_image_5]
         hp = list_hp[current_image_5]
         attack_power = list_attack_power[current_image_5]
+        cost = list_cost[current_image_5]
         text1 = f7.render(f'Имя: {name}', True, (255, 255, 255))
         screen.blit(text1, (30, 478))
         text1 = f7.render(f'HP: {hp}', True, (255, 255, 255))
         screen.blit(text1, (30, 498))
         text1 = f7.render(f'Сила атаки: {attack_power}', True, (255, 255, 255))
         screen.blit(text1, (30, 518))
+        text1 = f7.render(f'Цена повышения: {cost}', True, (255, 255, 255))
+        screen.blit(text1, (30, 538))
 
         if fff:
             screen.blit(sc, (484, 14))
