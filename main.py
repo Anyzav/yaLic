@@ -474,7 +474,6 @@ if __name__ == '__main__':
                         percentages2 = element_x2
                         rect2_x = 2.06 * element_x2
 
-                        print(hp_ch, element_x2)
 
                         count_enemy = 0
                         stop_image = True
@@ -513,9 +512,12 @@ if __name__ == '__main__':
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
                         hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
+
                         element_x = round(hp_enemy * percentages / list_hp_enemy[j])
+                        print(element_x, percentages, list_hp_enemy[j], att, list_attack_power[j])
                         list_hp_enemy[j] = hp_enemy
                         percentages = element_x
+                        print(hp_enemy, element_x)
 
                         rect1_x = 2.06 * element_x
 
@@ -542,7 +544,7 @@ if __name__ == '__main__':
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
-            if count_time <= 1:
+            if count_time <= 110:
                 for i in circles:
                     i.update()
                     all_sprites.draw(screen)
@@ -619,27 +621,159 @@ if __name__ == '__main__':
                         pygame.draw.rect(screen, (75, 0, 130), (482, 419, 571, 219), 2)  # корзинка
                         pygame.draw.circle(screen, (244, 164, 96), (1199, 485), 63, 2)  # магазин
                         pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43), 2)
-                        screen.blit(sc, (484, 14))
-                        current_image_1 = 0
-                        current_image_2 = 0
-                        current_image_3 = 0
-                        current_image_4 = 0
-                        current_image_5 = 0
 
-                        selection_button_1 = True  # флаги разрешение на тыкание кнопок
-                        selection_button_2 = False
-                        selection_button_3 = False
-                        selection_button_4 = False
+                        screen.blit(sc, (484, 14))  # отрисовка поля боя
 
-                        selection_button_flag1 = False  # флаг для вывода на экран изображений после их выбора
-                        selection_button_flag2 = False
-                        selection_button_flag3 = False
-                        selection_button_flag4 = False
+                        character_1 = pygame.image.load('перс1/1.png')
+                        character_2 = pygame.image.load('перс2/1.png')
+                        character_3 = pygame.image.load('перс3/1.png')
+                        character_4 = pygame.image.load('перс4/1.png')
+                        character_5 = pygame.image.load('перс5/1.png')
+                        character_6 = pygame.image.load('перс6/1.png')
+                        character_7 = pygame.image.load('перс7/1.png')
+                        character_8 = pygame.image.load('перс8/1.png')
 
-                        selection_finish_1 = False  # флаг для отслеживания вывода на экран галочек
-                        selection_finish_2 = False
-                        selection_finish_3 = False
-                        selection_finish_4 = False
+                        enemy_1 = pygame.image.load('злодей1/1.png')
+                        enemy_2 = pygame.image.load('злодей2/1.png')
+                        enemy_3 = pygame.image.load('злодей3/1.png')
+                        enemy_4 = pygame.image.load('злодей4/1.png')
+
+                        characters_of_choice = [character_1, character_2, character_3, character_4, character_5,
+                                                character_6, character_7, character_8]  # список персонажей
+
+                        characters_of_choice_1 = [pygame.image.load('перс1/2.png'), pygame.image.load('перс2/2.png'),
+                                                  pygame.image.load('перс3/2.png'), pygame.image.load('перс4/2.png'),
+                                                  pygame.image.load('перс5/2.png'), pygame.image.load('перс6/2.png'),
+                                                  pygame.image.load('перс7/2.png'), pygame.image.load('перс8/2.png')]
+
+                        enemies_of_choice = [enemy_1, enemy_2, enemy_3, enemy_4]  # список врагов
+
+                        to_attack = [pygame.image.load('перс1/для атаки/1.png'),
+                                     pygame.image.load('перс2/для атаки/1.png'),
+                                     pygame.image.load('перс3/для атаки/1.png'),
+                                     pygame.image.load('перс4/для атаки/1.png'),
+                                     pygame.image.load('перс5/для атаки/1.png'),
+                                     pygame.image.load('перс6/для атаки/1.png'),
+                                     pygame.image.load('перс7/для атаки/1.png'),
+                                     pygame.image.load('перс8/для атаки/1.png')]
+
+                        attack_1 = [pygame.image.load('перс1/для атаки/1.png'),
+                                    pygame.image.load('перс1/для атаки/2.png'),
+                                    pygame.image.load('перс1/для атаки/3.png'),
+                                    pygame.image.load('перс1/для атаки/4.png'),
+                                    pygame.image.load('перс1/для атаки/5.png'),
+                                    pygame.image.load('перс1/для атаки/6.png'),
+                                    pygame.image.load('перс1/для атаки/7.png')]
+
+                        attack_2 = [pygame.image.load('перс2/для атаки/1.png'),
+                                    pygame.image.load('перс2/для атаки/2.png'),
+                                    pygame.image.load('перс2/для атаки/3.png'),
+                                    pygame.image.load('перс2/для атаки/4.png'),
+                                    pygame.image.load('перс2/для атаки/5.png')]
+
+                        attack_3 = [pygame.image.load('перс3/для атаки/1.png'),
+                                    pygame.image.load('перс3/для атаки/2.png'),
+                                    pygame.image.load('перс3/для атаки/3.png'),
+                                    pygame.image.load('перс3/для атаки/4.png'),
+                                    pygame.image.load('перс3/для атаки/5.png'),
+                                    pygame.image.load('перс3/для атаки/6.png'),
+                                    pygame.image.load('перс3/для атаки/7.png'),
+                                    pygame.image.load('перс3/для атаки/8.png'),
+                                    pygame.image.load('перс3/для атаки/9.png')]
+
+                        attack_4 = [pygame.image.load('перс4/для атаки/1.png'),
+                                    pygame.image.load('перс4/для атаки/2.png'),
+                                    pygame.image.load('перс4/для атаки/3.png'),
+                                    pygame.image.load('перс4/для атаки/4.png'),
+                                    pygame.image.load('перс4/для атаки/5.png')]
+
+                        attack_5 = [pygame.image.load('перс5/для атаки/1.png'),
+                                    pygame.image.load('перс5/для атаки/2.png'),
+                                    pygame.image.load('перс5/для атаки/3.png'),
+                                    pygame.image.load('перс5/для атаки/4.png'),
+                                    pygame.image.load('перс5/для атаки/5.png'),
+                                    pygame.image.load('перс5/для атаки/6.png'),
+                                    pygame.image.load('перс5/для атаки/7.png'),
+                                    pygame.image.load('перс5/для атаки/8.png'),
+                                    pygame.image.load('перс5/для атаки/9.png'),
+                                    pygame.image.load('перс5/для атаки/10.png')]
+
+                        attack_6 = [pygame.image.load('перс6/для атаки/1.png'),
+                                    pygame.image.load('перс6/для атаки/2.png'),
+                                    pygame.image.load('перс6/для атаки/3.png'),
+                                    pygame.image.load('перс6/для атаки/4.png'),
+                                    pygame.image.load('перс6/для атаки/5.png'),
+                                    pygame.image.load('перс6/для атаки/6.png'),
+                                    pygame.image.load('перс6/для атаки/7.png'),
+                                    pygame.image.load('перс6/для атаки/8.png'),
+                                    pygame.image.load('перс6/для атаки/9.png'),
+                                    pygame.image.load('перс6/для атаки/10.png'),
+                                    pygame.image.load('перс6/для атаки/11.png')]
+
+                        attack_7 = [pygame.image.load('перс7/для атаки/1.png'),
+                                    pygame.image.load('перс7/для атаки/2.png'),
+                                    pygame.image.load('перс7/для атаки/3.png'),
+                                    pygame.image.load('перс7/для атаки/4.png'),
+                                    pygame.image.load('перс7/для атаки/5.png'),
+                                    pygame.image.load('перс7/для атаки/6.png'),
+                                    pygame.image.load('перс7/для атаки/7.png'),
+                                    pygame.image.load('перс7/для атаки/8.png')]
+
+                        attack_8 = [pygame.image.load('перс8/для атаки/1.png'),
+                                    pygame.image.load('перс8/для атаки/2.png'),
+                                    pygame.image.load('перс8/для атаки/3.png'),
+                                    pygame.image.load('перс8/для атаки/4.png'),
+                                    pygame.image.load('перс8/для атаки/5.png'),
+                                    pygame.image.load('перс8/для атаки/6.png'),
+                                    pygame.image.load('перс8/для атаки/7.png'),
+                                    pygame.image.load('перс8/для атаки/8.png')]
+
+                        attack_enemy_1 = [pygame.image.load('злодей1/для атаки/1.png'),
+                                          pygame.image.load('злодей1/для атаки/2.png'),
+                                          pygame.image.load('злодей1/для атаки/3.png'),
+                                          pygame.image.load('злодей1/для атаки/4.png'),
+                                          pygame.image.load('злодей1/для атаки/5.png'),
+                                          pygame.image.load('злодей1/для атаки/6.png'),
+                                          pygame.image.load('злодей1/для атаки/7.png')]
+
+                        attack_enemy_2 = [pygame.image.load('злодей2/для атаки/1.png'),
+                                          pygame.image.load('злодей2/для атаки/2.png'),
+                                          pygame.image.load('злодей2/для атаки/3.png'),
+                                          pygame.image.load('злодей2/для атаки/4.png'),
+                                          pygame.image.load('злодей2/для атаки/5.png'),
+                                          pygame.image.load('злодей2/для атаки/6.png'),
+                                          pygame.image.load('злодей2/для атаки/7.png')]
+
+                        attack_enemy_3 = [pygame.image.load('злодей3/для атаки/1.png'),
+                                          pygame.image.load('злодей3/для атаки/2.png'),
+                                          pygame.image.load('злодей3/для атаки/3.png'),
+                                          pygame.image.load('злодей3/для атаки/4.png'),
+                                          pygame.image.load('злодей3/для атаки/5.png'),
+                                          pygame.image.load('злодей3/для атаки/6.png'),
+                                          pygame.image.load('злодей3/для атаки/7.png')]
+
+                        attack_enemy_4 = [pygame.image.load('злодей4/для атаки/1.png'),
+                                          pygame.image.load('злодей4/для атаки/2.png'),
+                                          pygame.image.load('злодей4/для атаки/3.png'),
+                                          pygame.image.load('злодей4/для атаки/4.png'),
+                                          pygame.image.load('злодей4/для атаки/5.png'),
+                                          pygame.image.load('злодей4/для атаки/6.png'),
+                                          pygame.image.load('злодей4/для атаки/7.png')]
+
+                        kill = [pygame.image.load('анимация удара/1.png'), pygame.image.load('анимация удара/2.png'),
+                                pygame.image.load('анимация удара/3.png'), pygame.image.load('анимация удара/4.png'),
+                                pygame.image.load('анимация удара/5.png')]
+
+                        list_to_attack_characters = {character_1: attack_1, character_2: attack_2,
+                                                     character_3: attack_3,
+                                                     character_4: attack_4, character_5: attack_5,
+                                                     character_6: attack_6,
+                                                     character_7: attack_7, character_8: attack_8}
+
+                        to_attack_enemy = {enemy_1: attack_enemy_1, enemy_2: attack_enemy_2, enemy_3: attack_enemy_3,
+                                           enemy_4: attack_enemy_4}
+
+                        selected_characters = []  # список выбранных персонажей
 
                         choice_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255),
                                                                 (16, 388, 104, 19))  # первая клетка выбора
@@ -693,6 +827,59 @@ if __name__ == '__main__':
                         screen.blit(text2, (372, 230))
                         screen.blit(text3, (450, 230))
 
+                        list_name = []  # список имён персонажей
+                        list_hp = []  # список жизней персонажей
+                        list_attack_power = []  # список силы атаки персонажей
+                        list_raising_HP = []  # список повышения единиц жизней
+                        list_raising_attack = []  # список повышения единиц силы атаки
+
+                        list_name_enemy = []  # список имён врагов
+                        list_hp_enemy = []  # список жизней врагов
+                        list_attack_power_enemy = []  # список силы атаки врагов
+                        list_raising_HP_enemy = []  # список повышения единиц жизней врагов
+                        list_raising_attack_enemy = []  # список повышения единиц силы атаки врагов
+
+                        con = sqlite3.connect('characterization.sqlite')  # подключаем БД
+                        cur = con.cursor()
+                        result = cur.execute("""SELECT * FROM pers""").fetchall()
+                        for elem in result:
+                            list_name.append(elem[1])
+                            list_hp.append(elem[2])
+                            list_attack_power.append(elem[3])
+                            list_raising_HP.append(elem[4])
+                            list_raising_attack.append(elem[5])
+
+                        result_2 = cur.execute("""SELECT * FROM villains""").fetchall()
+                        for elem in result_2:
+                            list_name_enemy.append(elem[1])
+                            list_hp_enemy.append(elem[2])
+                            list_attack_power_enemy.append(elem[3])
+                            list_raising_HP_enemy.append(elem[4])
+                            list_raising_attack_enemy.append(elem[5])
+
+                        print(list_hp_enemy)
+
+                        current_image_1 = 0
+                        current_image_2 = 0
+                        current_image_3 = 0
+                        current_image_4 = 0
+                        current_image_5 = 0
+
+                        selection_button_1 = True  # флаги разрешение на тыкание кнопок
+                        selection_button_2 = False
+                        selection_button_3 = False
+                        selection_button_4 = False
+
+                        selection_button_flag1 = False  # флаг для вывода на экран изображений после их выбора
+                        selection_button_flag2 = False
+                        selection_button_flag3 = False
+                        selection_button_flag4 = False
+
+                        selection_finish_1 = False  # флаг для отслеживания вывода на экран галочек
+                        selection_finish_2 = False
+                        selection_finish_3 = False
+                        selection_finish_4 = False
+
                         displaying_enemies_on_the_screen = []  # список врагов для вывода на экран
                         displaying_enemies_on_the_screen = random.choices(enemies_of_choice, k=4)  # выбор 4 врагов
 
@@ -700,9 +887,6 @@ if __name__ == '__main__':
                         screen.blit(displaying_enemies_on_the_screen[1], (125, 44))
                         screen.blit(displaying_enemies_on_the_screen[2], (245, 44))
                         screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
-
-
-                        selected_characters = []
 
                         count_anim = 0
                         count_kill = 0
@@ -713,38 +897,41 @@ if __name__ == '__main__':
                         stop_image = True
                         run_image = False
 
+
+                        circles = []
+
+                        current_image = 0
+
                         block_run = False
                         block_stop_3_s = 0
 
                         experience = 0
+                        f8 = pygame.font.Font(None, 50)
 
                         count_time = 0
 
                         rect1_x = 206
                         rect2_x = 206
 
+
                         winning = [0, 0, 0, 0]
                         flag_attack = True
                         j = 0
                         percentages = 100
                         percentages2 = 100
-                        att = len(all_sprites.sprites())
-                        hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
-                        hp_enemy = int(list_hp_enemy[j]) - (
-                                    list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
+                        att = 16
+                        hp_ch = int(list_hp[j])
+                        hp_enemy = int(list_hp_enemy[j])
 
                         fff = False
                         money_win = 0
 
-                        characters_of_choice = [character_1, character_2, character_3, character_4, character_5,
-                                                character_6, character_7, character_8]  # список персонажей
+                        rect1_x = 206
+                        rect2_x = 206
+                        element_x = 100
+                        element_x2 = 100
 
-                        characters_of_choice_1 = [pygame.image.load('перс1/2.png'), pygame.image.load('перс2/2.png'),
-                                                  pygame.image.load('перс3/2.png'), pygame.image.load('перс4/2.png'),
-                                                  pygame.image.load('перс5/2.png'), pygame.image.load('перс6/2.png'),
-                                                  pygame.image.load('перс7/2.png'), pygame.image.load('перс8/2.png')]
-
-                        enemies_of_choice = [enemy_1, enemy_2, enemy_3, enemy_4]
+                        flag = True
 
                 if left_button_rect_5.collidepoint(mouse_pos):
                     current_image_5 -= 1
