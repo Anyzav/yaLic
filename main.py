@@ -377,6 +377,7 @@ if __name__ == '__main__':
     hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
     hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
 
+    fff = False
 
 
     flag = True
@@ -409,40 +410,55 @@ if __name__ == '__main__':
         text1 = f7.render(f'Сила атаки: {attack_power}', True, (255, 255, 255))
         screen.blit(text1, (30, 518))
 
+
         if run:
             window()
             if stop_image:
                 window()
                 block_run = True
                 block_stop_3_s += 1
+                percentages = 100
+
 
             if run_image:
+                if hp_ch <= 0 or hp_enemy <= 0:
+                    run_image = False
+                    run_flag_character = False
+                    stop_image = True
+                    hp_ch = int(list_hp[j])
+                    hp_enemy = int(list_hp_enemy[j])
+                    j += 1
+                    rect1_x = 206
+                    rect2_x = 206
+                    print(hp_ch, hp_enemy, j, att)
 
                 if run_flag_enemy:
-                    draw_enemy_anim()
+
+                    screen.blit(sc, (484, 14))
+                    screen.blit(list_to_attack_characters[selected_characters[j]][0], (951, 141))
+                    pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
+                    pygame.draw.rect(screen, (139, 0, 0), (941, 61, rect2_x, 22))
+                    pygame.draw.rect(screen, (255, 255, 255), (558, 25, 208, 24), 2)
+                    pygame.draw.rect(screen, (255, 255, 255), (939, 61, 208, 24), 2)
                     time.sleep(0.09)
-                    if count_enemy != len(to_attack_enemy[displaying_enemies_on_the_screen[j]]) - 1:
+
+
+                    if count_enemy != (len(to_attack_enemy[displaying_enemies_on_the_screen[j]]) - 1):
                         count_enemy += 1
-                    elif count_enemy == len(list_to_attack_characters[selected_characters[j]]) - 1:
+
+                    else:
                         hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
                         element_x2 = round(hp_ch * 100 / int(list_hp[j]))
                         list_hp[j] = hp_ch
                         rect2_x = 2.06 * element_x2
 
                         count_enemy = 0
-                        run_flag_enemy = False
                         stop_image = True
+                        run_flag_enemy = False
+                        run_image = False
+                        window()
 
-                        if hp_enemy <= 0:
-                            run_image = True
-                            run_flag_character = True
-                            j += 1
-                            hp_ch = int(list_hp[j])
-                            hp_enemy = int(list_hp_enemy[j])
-                            print(hp_ch, hp_enemy)
-                            percentages = 100
-                            rect1_x = 206
-                            rect2_x = 206
+
 
 
                     # if count_kill == len(kill) - 1:
@@ -452,13 +468,24 @@ if __name__ == '__main__':
                     # screen.blit(kill[count_kill], (753, 168))
                     if displaying_enemies_on_the_screen[j] == enemy_1 or displaying_enemies_on_the_screen[j] == enemy_2:
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][count_enemy], (515, 45))
-                    elif displaying_enemies_on_the_screen[j] == enemy_3:
+                    if displaying_enemies_on_the_screen[j] == enemy_3:
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][count_enemy], (500, 50))
-                    elif displaying_enemies_on_the_screen[j] == enemy_4:
+                    if displaying_enemies_on_the_screen[j] == enemy_4:
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][count_enemy], (500, 100))
 
                 if run_flag_character:
-                    draw_character_anim()
+
+                    screen.blit(sc, (484, 14))
+                    pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
+                    pygame.draw.rect(screen, (139, 0, 0), (941, 61, rect2_x, 22))
+                    pygame.draw.rect(screen, (255, 255, 255), (558, 25, 208, 24), 2)
+                    pygame.draw.rect(screen, (255, 255, 255), (939, 61, 208, 24), 2)
+                    if displaying_enemies_on_the_screen[j] == enemy_1 or displaying_enemies_on_the_screen[j] == enemy_2:
+                        screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (515, 45))
+                    if displaying_enemies_on_the_screen[j] == enemy_3:
+                        screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 50))
+                    if displaying_enemies_on_the_screen[j] == enemy_4:
+                        screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
                         hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
@@ -469,25 +496,11 @@ if __name__ == '__main__':
                         rect1_x = 2.06 * element_x
 
                         count_anim = 0
-                        run_flag_character = False
-                        run_flag_enemy = True
-                        stop_image = False
-                        block_stop_3_s = 0
                         count_time = 0
-                        circles = []
+                        run_flag_enemy = True
+                        run_flag_character = False
 
-                        if hp_ch <= 0:
-                            run_image = True
-                            run_flag_character = True
-                            j += 1
-                            hp_ch = int(list_hp[j])
-                            hp_enemy = int(list_hp_enemy[j])
-                            print(hp_ch, hp_enemy)
-                            percentages = 100
-                            rect1_x = 206
-                            rect2_x = 206
-
-                    elif count_anim != len(list_to_attack_characters[selected_characters[j]]) - 1:
+                    if count_anim != len(list_to_attack_characters[selected_characters[j]]) - 1:
                         count_anim += 1
                     screen.blit(list_to_attack_characters[selected_characters[j]][count_anim], (951, 141))
 
@@ -498,10 +511,10 @@ if __name__ == '__main__':
             screen.blit(basket, (484, 421))
             count_time += 1
             if block_stop_3_s == 1:
-                time.sleep(5)
+                time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
-            if count_time <= 120:
+            if count_time <= 10:
                 for i in circles:
                     i.update()
                     all_sprites.draw(screen)
@@ -511,6 +524,11 @@ if __name__ == '__main__':
                     all_sprites.remove(i)
                 run_image = True
                 run_flag_character = True
+                block_run = False
+                stop_image = False
+                block_stop_3_s = 0
+                count_time = 0
+                circles = []
 
 
 
