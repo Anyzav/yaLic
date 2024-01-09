@@ -373,12 +373,13 @@ if __name__ == '__main__':
     flag_attack = True
     j = 0
     percentages = 100
+    percentages2 = 100
     att = len(all_sprites.sprites())
     hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
     hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
 
     fff = False
-
+    money_win = 0
 
     flag = True
     while flag:
@@ -410,26 +411,47 @@ if __name__ == '__main__':
         text1 = f7.render(f'Сила атаки: {attack_power}', True, (255, 255, 255))
         screen.blit(text1, (30, 518))
 
+        if fff:
+            screen.blit(sc, (484, 14))
+            f9 = pygame.font.Font(None, 80)
+            text1 = f9.render(f'Вы выиграли {money_win} монет', True, (255, 255, 255))
+            screen.blit(text1, (558, 55))
+            f1f1f1 = pygame.draw.rect(screen, (107, 66, 189), (585, 130, 205, 70))
+            f10 = pygame.font.Font(None, 30)
+            text1 = f10.render(f'Начать новую игру', True, (255, 255, 255))
+            screen.blit(text1, (588, 155))
+
         if run:
             window()
             if stop_image:
-                window()
-                block_run = True
-                block_stop_3_s += 1
-                percentages = 100
+                if hp_ch <= 0 or hp_enemy <= 0:
+                    if hp_enemy <= 0:
+                        winning[j] = 1
+                    j += 1
+                    if j == 4:
+                        stop_image = False
+                        run = False
+                        fff = True
+                    else:
+                        hp_ch = int(list_hp[j])
+                        hp_enemy = int(list_hp_enemy[j])
+                        rect1_x = 206
+                        rect2_x = 206
+                        element_x = 100
+                        element_x2 = 100
+                        percentages = 100
+                        percentages2 = 100
+                if j == 4:
+                    stop_image = False
+                    run = False
+                else:
+                    window()
+                    block_run = True
+                    block_stop_3_s += 1
+
 
 
             if run_image:
-                if hp_ch <= 0 or hp_enemy <= 0:
-                    run_image = False
-                    run_flag_character = False
-                    stop_image = True
-                    hp_ch = int(list_hp[j])
-                    hp_enemy = int(list_hp_enemy[j])
-                    j += 1
-                    rect1_x = 206
-                    rect2_x = 206
-                    print(hp_ch, hp_enemy, j, att)
 
                 if run_flag_enemy:
 
@@ -447,9 +469,12 @@ if __name__ == '__main__':
 
                     else:
                         hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
-                        element_x2 = round(hp_ch * 100 / int(list_hp[j]))
+                        element_x2 = round(hp_ch * percentages2 / int(list_hp[j]))
                         list_hp[j] = hp_ch
+                        percentages2 = element_x2
                         rect2_x = 2.06 * element_x2
+
+                        print(hp_ch, element_x2)
 
                         count_enemy = 0
                         stop_image = True
@@ -488,7 +513,7 @@ if __name__ == '__main__':
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
                         hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
-                        element_x = round(hp_enemy * percentages / list_hp_enemy[0])
+                        element_x = round(hp_enemy * percentages / list_hp_enemy[j])
                         list_hp_enemy[j] = hp_enemy
                         percentages = element_x
 
@@ -496,13 +521,17 @@ if __name__ == '__main__':
 
                         count_anim = 0
                         count_time = 0
-                        run_flag_enemy = True
-                        run_flag_character = False
+                        if hp_enemy < 0:
+                            run_flag_character = False
+                            stop_image = True
+                            run_image = False
+                        else:
+                            run_flag_enemy = True
+                            run_flag_character = False
 
                     if count_anim != len(list_to_attack_characters[selected_characters[j]]) - 1:
                         count_anim += 1
                     screen.blit(list_to_attack_characters[selected_characters[j]][count_anim], (951, 141))
-
 
 
         if block_run:
@@ -513,7 +542,7 @@ if __name__ == '__main__':
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
-            if count_time <= 100:
+            if count_time <= 1:
                 for i in circles:
                     i.update()
                     all_sprites.draw(screen)
@@ -573,6 +602,149 @@ if __name__ == '__main__':
                     # con.commit()
                     list_hp[current_image_5] = str(int(list_hp[current_image_5]) + int(list_raising_HP[current_image_5]))
                     list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
+
+                if fff:
+                    if f1f1f1.collidepoint(mouse_pos):
+                        pygame.draw.rect(screen, (230, 230, 250), (13, 12, 462, 23))  # имя, уровень, выйти из аккаунта
+                        pygame.draw.rect(screen, (220, 20, 60), (13, 42, 462, 183), 2)  # враги
+                        pygame.draw.line(screen, (220, 20, 60), [121, 42], [121, 224], 2)
+                        pygame.draw.line(screen, (220, 20, 60), [242, 42], [242, 224], 2)
+                        pygame.draw.line(screen, (220, 20, 60), [363, 42], [363, 224], 2)
+                        pygame.draw.rect(screen, (148, 0, 211), (13, 228, 462, 181), 2)  # выбор персонажа
+                        pygame.draw.line(screen, (148, 0, 211), [121, 228], [121, 408], 2)
+                        pygame.draw.line(screen, (148, 0, 211), [242, 228], [242, 408], 2)
+                        pygame.draw.line(screen, (148, 0, 211), [363, 228], [363, 408], 2)
+                        pygame.draw.rect(screen, (72, 61, 139), (13, 415, 462, 226), 2)  # описание персонажа
+                        pygame.draw.rect(screen, (139, 0, 0), (482, 12, 787, 398), 2)  # поле боя
+                        pygame.draw.rect(screen, (75, 0, 130), (482, 419, 571, 219), 2)  # корзинка
+                        pygame.draw.circle(screen, (244, 164, 96), (1199, 485), 63, 2)  # магазин
+                        pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43), 2)
+                        screen.blit(sc, (484, 14))
+                        current_image_1 = 0
+                        current_image_2 = 0
+                        current_image_3 = 0
+                        current_image_4 = 0
+                        current_image_5 = 0
+
+                        selection_button_1 = True  # флаги разрешение на тыкание кнопок
+                        selection_button_2 = False
+                        selection_button_3 = False
+                        selection_button_4 = False
+
+                        selection_button_flag1 = False  # флаг для вывода на экран изображений после их выбора
+                        selection_button_flag2 = False
+                        selection_button_flag3 = False
+                        selection_button_flag4 = False
+
+                        selection_finish_1 = False  # флаг для отслеживания вывода на экран галочек
+                        selection_finish_2 = False
+                        selection_finish_3 = False
+                        selection_finish_4 = False
+
+                        choice_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255),
+                                                                (16, 388, 104, 19))  # первая клетка выбора
+                        left_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (16, 232, 28, 17))
+                        right_button_rect_1 = pygame.draw.rect(screen, (246, 143, 255), (92, 232, 28, 17))
+                        f1 = pygame.font.Font(None, 22)
+                        f2 = pygame.font.Font(None, 27)
+                        text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+                        text2 = f2.render('<-', True, (255, 255, 255))
+                        text3 = f2.render('->', True, (255, 255, 255))
+                        screen.blit(text1, (30, 390))
+                        screen.blit(text2, (22, 230))
+                        screen.blit(text3, (97, 230))
+
+                        choice_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255),
+                                                                (124, 388, 117, 19))  # вторая клетка выбора
+                        left_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (124, 232, 28, 17))
+                        right_button_rect_2 = pygame.draw.rect(screen, (246, 143, 255), (213, 232, 28, 17))
+                        f1 = pygame.font.Font(None, 22)
+                        f2 = pygame.font.Font(None, 27)
+                        text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+                        text2 = f2.render('<-', True, (255, 255, 255))
+                        text3 = f2.render('->', True, (255, 255, 255))
+                        screen.blit(text1, (145, 390))
+                        screen.blit(text2, (130, 230))
+                        screen.blit(text3, (220, 230))
+
+                        choice_button_rect_3 = pygame.draw.rect(screen, (246, 143, 255),
+                                                                (245, 388, 117, 19))  # третья клетка выбора
+                        left_button_rect_3 = pygame.draw.rect(screen, (246, 143, 255), (245, 232, 28, 17))
+                        right_button_rect_3 = pygame.draw.rect(screen, (246, 143, 255), (334, 232, 28, 17))
+                        f1 = pygame.font.Font(None, 22)
+                        f2 = pygame.font.Font(None, 27)
+                        text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+                        text2 = f2.render('<-', True, (255, 255, 255))
+                        text3 = f2.render('->', True, (255, 255, 255))
+                        screen.blit(text1, (265, 390))
+                        screen.blit(text2, (251, 230))
+                        screen.blit(text3, (340, 230))
+
+                        choice_button_rect_4 = pygame.draw.rect(screen, (246, 143, 255),
+                                                                (366, 388, 107, 19))  # четвёртая клетка выбора
+                        left_button_rect_4 = pygame.draw.rect(screen, (246, 143, 255), (366, 232, 28, 17))
+                        right_button_rect_4 = pygame.draw.rect(screen, (246, 143, 255), (445, 232, 28, 17))
+                        f1 = pygame.font.Font(None, 22)
+                        f2 = pygame.font.Font(None, 27)
+                        text1 = f1.render('ВЫБРАТЬ', True, (255, 255, 255))
+                        text2 = f2.render('<-', True, (255, 255, 255))
+                        text3 = f2.render('->', True, (255, 255, 255))
+                        screen.blit(text1, (380, 390))
+                        screen.blit(text2, (372, 230))
+                        screen.blit(text3, (450, 230))
+
+                        displaying_enemies_on_the_screen = []  # список врагов для вывода на экран
+                        displaying_enemies_on_the_screen = random.choices(enemies_of_choice, k=4)  # выбор 4 врагов
+
+                        screen.blit(displaying_enemies_on_the_screen[0], (16, 44))  # вывод врагов на экран
+                        screen.blit(displaying_enemies_on_the_screen[1], (125, 44))
+                        screen.blit(displaying_enemies_on_the_screen[2], (245, 44))
+                        screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
+
+
+                        selected_characters = []
+
+                        count_anim = 0
+                        count_kill = 0
+                        count_enemy = 0
+                        run = False
+                        run_flag_enemy = False
+                        run_flag_character = True
+                        stop_image = True
+                        run_image = False
+
+                        block_run = False
+                        block_stop_3_s = 0
+
+                        experience = 0
+
+                        count_time = 0
+
+                        rect1_x = 206
+                        rect2_x = 206
+
+                        winning = [0, 0, 0, 0]
+                        flag_attack = True
+                        j = 0
+                        percentages = 100
+                        percentages2 = 100
+                        att = len(all_sprites.sprites())
+                        hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
+                        hp_enemy = int(list_hp_enemy[j]) - (
+                                    list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
+
+                        fff = False
+                        money_win = 0
+
+                        characters_of_choice = [character_1, character_2, character_3, character_4, character_5,
+                                                character_6, character_7, character_8]  # список персонажей
+
+                        characters_of_choice_1 = [pygame.image.load('перс1/2.png'), pygame.image.load('перс2/2.png'),
+                                                  pygame.image.load('перс3/2.png'), pygame.image.load('перс4/2.png'),
+                                                  pygame.image.load('перс5/2.png'), pygame.image.load('перс6/2.png'),
+                                                  pygame.image.load('перс7/2.png'), pygame.image.load('перс8/2.png')]
+
+                        enemies_of_choice = [enemy_1, enemy_2, enemy_3, enemy_4]
 
                 if left_button_rect_5.collidepoint(mouse_pos):
                     current_image_5 -= 1
@@ -651,7 +823,6 @@ if __name__ == '__main__':
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         run = True
-
 
     pygame.quit()
     con.close()
