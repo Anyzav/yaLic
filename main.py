@@ -369,7 +369,7 @@ if __name__ == '__main__':
             screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
 
 
-    winning = [0, 1, 2, 3]
+    winning = [0, 0, 0, 0]
     flag_attack = True
     j = 0
     percentages = 100
@@ -409,7 +409,6 @@ if __name__ == '__main__':
         screen.blit(text1, (30, 498))
         text1 = f7.render(f'Сила атаки: {attack_power}', True, (255, 255, 255))
         screen.blit(text1, (30, 518))
-
 
         if run:
             window()
@@ -514,7 +513,7 @@ if __name__ == '__main__':
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
-            if count_time <= 10:
+            if count_time <= 100:
                 for i in circles:
                     i.update()
                     all_sprites.draw(screen)
