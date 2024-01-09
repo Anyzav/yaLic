@@ -30,6 +30,9 @@ if __name__ == '__main__':
     sc = pygame.image.load('сцена.png')
     screen.blit(sc, (484, 14))  # отрисовка поля боя
 
+    score = 50  # счетчик монет
+    f11 = pygame.font.Font(None, 40)
+
     character_1 = pygame.image.load('перс1/1.png')
     character_2 = pygame.image.load('перс2/1.png')
     character_3 = pygame.image.load('перс3/1.png')
@@ -383,6 +386,9 @@ if __name__ == '__main__':
 
     flag = True
     while flag:
+        pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43))
+        score_text = f11.render(f"Счет: {score}", True, (255, 255, 255))
+        screen.blit(score_text, (1065, 572))
         new(experience)
         # print(exper)
 
