@@ -259,11 +259,7 @@ if __name__ == '__main__':
     screen.blit(displaying_enemies_on_the_screen[2], (245, 44))
     screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
 
-    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[0]])
-    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[1]])
-    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[2]])
-    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[3]])
-    print(list_for_j_en)
+
 
     count_anim = 0
     count_kill = 0
@@ -498,8 +494,9 @@ if __name__ == '__main__':
                         count_enemy += 1
 
                     else:
-                        print(hp_ch)
+
                         hp_ch = int(list_hp[list_for_j[j]]) - list_attack_power_enemy[j]
+                        print(hp_ch)
                         element_x2 = round(hp_ch * percentages2 / int(list_hp[list_for_j[j]]))
                         list_hp[list_for_j[j]] = hp_ch
                         percentages2 = element_x2
@@ -571,6 +568,7 @@ if __name__ == '__main__':
             screen.blit(basket, (484, 421))
             count_time += 1
             if block_stop_3_s == 1:
+                hp_ch = int(list_hp1[list_for_j[j]])
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
@@ -822,6 +820,7 @@ if __name__ == '__main__':
                         att = 16
                         hp_ch = int(list_hp1[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[j])
+                        print(hp_ch)
 
                         fff = False
                         money_win = 0
