@@ -623,7 +623,7 @@ if __name__ == '__main__':
                     if score >= cost:
                         score -= cost
                         list_hp1[current_image_5] = str(int(list_hp1[current_image_5]) + int(list_raising_HP[current_image_5]))
-                        list_hp[current_image_5] = str(int(list_hp1[current_image_5]) + int(list_raising_HP[current_image_5]))
+                        list_hp[current_image_5] = list_hp1[current_image_5]
                         list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
 
                 if fff:
