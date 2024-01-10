@@ -443,6 +443,10 @@ if __name__ == '__main__':
                         stop_image = False
                         run = False
                         fff = True
+                        for i in winning:
+                            if i == 1:
+                                money_win += 15
+                                score += 15
                     else:
                         hp_ch = int(list_hp[j])
                         hp_enemy = int(list_hp_enemy[j])
