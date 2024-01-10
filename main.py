@@ -189,6 +189,7 @@ if __name__ == '__main__':
 
     list_name = []  # список имён персонажей
     list_hp = []  # список жизней персонажей
+    list_hp1 = []
     list_attack_power = []  # список силы атаки персонажей
     list_raising_HP = []  # список повышения единиц жизней
     list_raising_attack = []  # список повышения единиц силы атаки
@@ -206,6 +207,7 @@ if __name__ == '__main__':
     for elem in result:
         list_name.append(elem[1])
         list_hp.append(elem[2])
+        list_hp1.append(elem[2])
         list_attack_power.append(elem[3])
         list_raising_HP.append(elem[4])
         list_raising_attack.append(elem[5])
@@ -409,7 +411,7 @@ if __name__ == '__main__':
 
         pygame.draw.rect(screen, (107, 66, 189), (25, 468, 132, 90))  # вывод на экран характеристик
         name = list_name[current_image_5]
-        hp = list_hp[current_image_5]
+        hp = list_hp1[current_image_5]
         attack_power = list_attack_power[current_image_5]
         cost = list_cost[current_image_5]
         text1 = f7.render(f'Имя: {name}', True, (255, 255, 255))
