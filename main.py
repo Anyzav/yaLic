@@ -253,10 +253,17 @@ if __name__ == '__main__':
     displaying_enemies_on_the_screen = []  # список врагов для вывода на экран
     displaying_enemies_on_the_screen = random.choices(enemies_of_choice, k=4)  # выбор 4 врагов
 
+    list_for_j_en = []
     screen.blit(displaying_enemies_on_the_screen[0], (16, 44))  # вывод врагов на экран
     screen.blit(displaying_enemies_on_the_screen[1], (125, 44))
     screen.blit(displaying_enemies_on_the_screen[2], (245, 44))
     screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
+
+    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[0]])
+    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[1]])
+    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[2]])
+    list_for_j_en.append(enemies_of_choice.index[displaying_enemies_on_the_screen[3]])
+    print(list_for_j_en)
 
     count_anim = 0
     count_kill = 0
@@ -383,6 +390,7 @@ if __name__ == '__main__':
     flag_attack = True
     list_for_j = [0]
     j = 0
+    j_en = 0
     percentages = 100
     percentages2 = 100
     att = len(all_sprites.sprites())
