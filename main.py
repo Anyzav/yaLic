@@ -524,7 +524,7 @@ if __name__ == '__main__':
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
-                        hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
+                        hp_enemy = int(list_hp_enemy[j]) - (int(list_attack_power[j]) * round((12 - att + 4) * 100 / 12)) / 100
 
                         element_x = round(hp_enemy * percentages / list_hp_enemy[j])
                         list_hp_enemy[j] = hp_enemy
