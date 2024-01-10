@@ -395,7 +395,7 @@ if __name__ == '__main__':
     flag = True
 
     while flag:
-        print(list_for_j)
+        #print(list_for_j)
         pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43))
         score_text = f11.render(f"Счет: {score}", True, (255, 255, 255))
         screen.blit(score_text, (1065, 572))
@@ -812,7 +812,7 @@ if __name__ == '__main__':
                         percentages = 100
                         percentages2 = 100
                         att = 16
-                        hp_ch = int(list_hp[list_for_j[j]])
+                        hp_ch = int(list_hp1[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[j])
 
                         fff = False
