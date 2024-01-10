@@ -527,10 +527,8 @@ if __name__ == '__main__':
                         hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
 
                         element_x = round(hp_enemy * percentages / list_hp_enemy[j])
-                        print(element_x, percentages, list_hp_enemy[j], att, list_attack_power[j])
                         list_hp_enemy[j] = hp_enemy
                         percentages = element_x
-                        print(hp_enemy, element_x)
 
                         rect1_x = 2.06 * element_x
 
@@ -621,7 +619,7 @@ if __name__ == '__main__':
                     # con.commit()
                     if score >= cost:
                         score -= cost
-                        list_hp[current_image_5] = str(int(list_hp[current_image_5]) + int(list_raising_HP[current_image_5]))
+                        list_hp1[current_image_5] = str(int(list_hp1[current_image_5]) + int(list_raising_HP[current_image_5]))
                         list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
 
                 if fff:
@@ -743,8 +741,6 @@ if __name__ == '__main__':
                             list_attack_power_enemy.append(elem[3])
                             list_raising_HP_enemy.append(elem[4])
                             list_raising_attack_enemy.append(elem[5])
-
-                        print(list_hp_enemy)
 
                         current_image_1 = 0
                         current_image_2 = 0
