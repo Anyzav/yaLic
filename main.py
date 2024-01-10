@@ -956,6 +956,9 @@ if __name__ == '__main__':
                     current_image_5 += 1
                     if current_image_5 >= len(characters_of_choice_1):
                         current_image_5 = 0
+                elif level_up.collidepoint(mouse_pos):
+                    if score >= cost:
+                        score -= cost
 
                 if selection_button_1:
                     if left_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "<-" в первой клетке выбора
