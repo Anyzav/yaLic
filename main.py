@@ -396,6 +396,7 @@ if __name__ == '__main__':
     att = len(all_sprites.sprites())
     hp_ch = int(list_hp[list_for_j[j]])
     hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
+    red = False
 
     fff = False
     money_win = 0
@@ -499,7 +500,7 @@ if __name__ == '__main__':
                     else:
 
                         hp_ch = int(list_hp[list_for_j[j]]) - list_attack_power_enemy[list_for_j_en[j]]
-                        print(hp_ch, hp_enemy)
+                        print(hp_ch, '- hp')
                         element_x2 = round(hp_ch * percentages2 / int(list_hp[list_for_j[j]]))
                         list_hp[list_for_j[j]] = hp_ch
                         percentages2 = element_x2
@@ -540,7 +541,7 @@ if __name__ == '__main__':
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]]) - (int(list_attack_power[list_for_j[j]]) * round((12 - att + 4) * 100 / 12)) / 100
-                        print(hp_ch, hp_enemy)
+                        print(hp_ch)
                         element_x = round(hp_enemy * percentages / list_hp_enemy[list_for_j_en[j]])
                         list_hp_enemy[list_for_j_en[j]] = hp_enemy
                         percentages = element_x
@@ -638,6 +639,7 @@ if __name__ == '__main__':
                         list_hp1[current_image_5] = str(int(list_hp1[current_image_5]) + int(list_raising_HP[current_image_5]))
                         list_hp[current_image_5] = list_hp1[current_image_5]
                         list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
+                        red = True
 
                 if fff:
                     if f1f1f1.collidepoint(mouse_pos):
@@ -821,10 +823,14 @@ if __name__ == '__main__':
                         percentages = 100
                         percentages2 = 100
                         att = 16
-                        list_hp = list_hp1
+                        if red:
+                            list_hp = list_hp1
+                            list_attack_power[list_for_j[j]] = str(
+                                int(list_attack_power[list_for_j[j]]) + int(list_raising_attack[list_for_j[j]]))
+                            red = False
                         hp_ch = int(list_hp1[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
-                        list_attack_power[list_for_j[j]] = str( int(list_attack_power[list_for_j[j]]) + int(list_raising_attack[list_for_j[j]]))
+
 
                         money_win = 0
 
