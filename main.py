@@ -392,14 +392,13 @@ if __name__ == '__main__':
         score_text = f11.render(f"Счет: {score}", True, (255, 255, 255))
         screen.blit(score_text, (1065, 572))
         new(experience)
-        # print(exper)
 
         level_up = pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
         f4 = pygame.font.Font(None, 25)
         text1 = f4.render('УЛУЧШИТЬ', True, (245, 255, 255))
         screen.blit(text1, (355, 615))
 
-        left_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (27, 429, 47, 30))  # конпка улучшить
+        left_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (27, 429, 47, 30))
         right_button_rect_5 = pygame.draw.rect(screen, (107, 66, 189), (410, 429, 47, 30))
         f5 = pygame.font.Font(None, 42)
         f6 = pygame.font.Font(None, 42)
@@ -444,7 +443,7 @@ if __name__ == '__main__':
                         run = False
                         fff = True
                         for i in winning:
-                            if i == 1:
+                            if i == 100:
                                 money_win += 15
                                 score += 15
                     else:
@@ -494,16 +493,13 @@ if __name__ == '__main__':
                         stop_image = True
                         run_flag_enemy = False
                         run_image = False
+                        count_kill = 0
                         window()
 
 
 
 
-                    # if count_kill == len(kill) - 1:
-                        # run_flag_enemy = False
-                    # else:
-                        # count_kill += 1
-                    # screen.blit(kill[count_kill], (753, 168))
+
                     if displaying_enemies_on_the_screen[j] == enemy_1 or displaying_enemies_on_the_screen[j] == enemy_2:
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][count_enemy], (515, 45))
                     if displaying_enemies_on_the_screen[j] == enemy_3:
@@ -538,6 +534,7 @@ if __name__ == '__main__':
 
                         count_anim = 0
                         count_time = 0
+
                         if hp_enemy < 0:
                             run_flag_character = False
                             stop_image = True
@@ -549,6 +546,9 @@ if __name__ == '__main__':
                     if count_anim != len(list_to_attack_characters[selected_characters[j]]) - 1:
                         count_anim += 1
                     screen.blit(list_to_attack_characters[selected_characters[j]][count_anim], (951, 141))
+                    if count_kill != len(kill) - 1:
+                        count_kill += 1
+                    screen.blit(kill[count_kill], (753, 168))
 
 
         if block_run:
@@ -559,7 +559,7 @@ if __name__ == '__main__':
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
-            if count_time <= 110:
+            if count_time <= 50:
                 for i in circles:
                     i.update()
                     all_sprites.draw(screen)
