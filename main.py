@@ -541,7 +541,6 @@ if __name__ == '__main__':
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]]) - (int(list_attack_power[list_for_j[j]]) * round((12 - att + 4) * 100 / 12)) / 100
-                        print(hp_ch)
                         element_x = round(hp_enemy * percentages / list_hp_enemy[list_for_j_en[j]])
                         list_hp_enemy[list_for_j_en[j]] = hp_enemy
                         percentages = element_x
@@ -572,7 +571,7 @@ if __name__ == '__main__':
             screen.blit(basket, (484, 421))
             count_time += 1
             if block_stop_3_s == 1:
-                print(list_attack_power[list_for_j[j]])
+                print(list_attack_power[list_for_j[j]] - att)
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
