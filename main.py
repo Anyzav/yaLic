@@ -50,6 +50,9 @@ if __name__ == '__main__':
     characters_of_choice = [character_1, character_2, character_3, character_4, character_5,
                             character_6, character_7, character_8]  # список персонажей
 
+    characters_of_choice_2 = [character_1, character_2, character_3, character_4, character_5,
+                            character_6, character_7, character_8]
+
     characters_of_choice_1 = [pygame.image.load('перс1/2.png'), pygame.image.load('перс2/2.png'),
                             pygame.image.load('перс3/2.png'), pygame.image.load('перс4/2.png'),
                             pygame.image.load('перс5/2.png'), pygame.image.load('перс6/2.png'),
@@ -378,12 +381,13 @@ if __name__ == '__main__':
 
     winning = [0, 0, 0, 0]
     flag_attack = True
+    list_for_j = [0]
     j = 0
     percentages = 100
     percentages2 = 100
     att = len(all_sprites.sprites())
-    hp_ch = int(list_hp[j])
-    hp_enemy = int(list_hp_enemy[j])
+    hp_ch = int(list_hp[list_for_j[j]])
+    hp_enemy = int(list_hp_enemy[list_for_j[j]])
 
     fff = False
     money_win = 0
@@ -391,7 +395,7 @@ if __name__ == '__main__':
     flag = True
 
     while flag:
-        print(hp_ch)
+        print(list_for_j)
         pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43))
         score_text = f11.render(f"Счет: {score}", True, (255, 255, 255))
         screen.blit(score_text, (1065, 572))
@@ -451,7 +455,7 @@ if __name__ == '__main__':
                                 money_win += 15
                                 score += 15
                     else:
-                        hp_ch = int(list_hp[j])
+                        hp_ch = int(list_hp[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[j])
                         rect1_x = 206
                         rect2_x = 206
@@ -487,9 +491,9 @@ if __name__ == '__main__':
 
                     else:
                         print(hp_ch)
-                        hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
-                        element_x2 = round(hp_ch * percentages2 / int(list_hp[j]))
-                        list_hp[j] = hp_ch
+                        hp_ch = int(list_hp[list_for_j[j]]) - list_attack_power_enemy[j]
+                        element_x2 = round(hp_ch * percentages2 / int(list_hp[list_for_j[j]]))
+                        list_hp[list_for_j[j]] = hp_ch
                         percentages2 = element_x2
                         rect2_x = 2.06 * element_x2
 
@@ -803,11 +807,12 @@ if __name__ == '__main__':
 
                         winning = [0, 0, 0, 0]
                         flag_attack = True
+                        list_for_j = [0]
                         j = 0
                         percentages = 100
                         percentages2 = 100
                         att = 16
-                        hp_ch = int(list_hp[j])
+                        hp_ch = int(list_hp[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[j])
 
                         fff = False
@@ -844,6 +849,7 @@ if __name__ == '__main__':
                         selection_button_1 = False
                         selection_button_2 = True
                         selection_finish_1 = True
+                        list_for_j[0] = characters_of_choice_2.index(characters_of_choice[current_image_1])
                         del characters_of_choice[current_image_1]  # удаление выбранного персонажа из общего списка
 
                 if selection_button_2:
@@ -861,6 +867,7 @@ if __name__ == '__main__':
                         selection_button_2 = False
                         selection_button_3 = True
                         selection_finish_2 = True
+                        list_for_j.append(characters_of_choice_2.index(characters_of_choice[current_image_2]))
                         del characters_of_choice[current_image_2]  # удаление выбранного персонажа из общего списка
 
                 if selection_button_3:
@@ -878,6 +885,7 @@ if __name__ == '__main__':
                         selection_button_3 = False
                         selection_button_4 = True
                         selection_finish_3 = True
+                        list_for_j.append(characters_of_choice_2.index(characters_of_choice[current_image_3]))
                         del characters_of_choice[current_image_3]  # удаление выбранного персонажа из общего списка
 
                 if selection_button_4:
@@ -894,6 +902,7 @@ if __name__ == '__main__':
                         selection_button_flag4 = True
                         selection_button_4 = False
                         selection_finish_4 = True
+                        list_for_j.append(characters_of_choice_2.index(characters_of_choice[current_image_4]))
                         del characters_of_choice[current_image_4]  # удаление выбранного персонажа из общего списка
                     if selection_button_1 != True and selection_button_2 != True and selection_button_3 != True and selection_button_4 != True:
                         run = True
