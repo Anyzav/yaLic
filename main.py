@@ -617,8 +617,10 @@ if __name__ == '__main__':
                     # sql_update_query = """Update pers set Attack_power = 10000 where id = 4"""
                     # cur.execute(sql_update_query)
                     # con.commit()
-                    list_hp[current_image_5] = str(int(list_hp[current_image_5]) + int(list_raising_HP[current_image_5]))
-                    list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
+                    if score >= cost:
+                        score -= cost
+                        list_hp[current_image_5] = str(int(list_hp[current_image_5]) + int(list_raising_HP[current_image_5]))
+                        list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
 
                 if fff:
                     if f1f1f1.collidepoint(mouse_pos):
@@ -956,9 +958,6 @@ if __name__ == '__main__':
                     current_image_5 += 1
                     if current_image_5 >= len(characters_of_choice_1):
                         current_image_5 = 0
-                elif level_up.collidepoint(mouse_pos):
-                    if score >= cost:
-                        score -= cost
 
                 if selection_button_1:
                     if left_button_rect_1.collidepoint(mouse_pos):  # если нажимают на "<-" в первой клетке выбора
