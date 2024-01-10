@@ -382,14 +382,16 @@ if __name__ == '__main__':
     percentages = 100
     percentages2 = 100
     att = len(all_sprites.sprites())
-    hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
-    hp_enemy = int(list_hp_enemy[j]) - (list_attack_power[j] * round((12 - att + 4) * 100 / 12)) / 100
+    hp_ch = int(list_hp[j])
+    hp_enemy = int(list_hp_enemy[j])
 
     fff = False
     money_win = 0
 
     flag = True
+
     while flag:
+        print(hp_ch)
         pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43))
         score_text = f11.render(f"Счет: {score}", True, (255, 255, 255))
         screen.blit(score_text, (1065, 572))
@@ -484,6 +486,7 @@ if __name__ == '__main__':
                         count_enemy += 1
 
                     else:
+                        print(hp_ch)
                         hp_ch = int(list_hp[j]) - list_attack_power_enemy[j]
                         element_x2 = round(hp_ch * percentages2 / int(list_hp[j]))
                         list_hp[j] = hp_ch
@@ -559,7 +562,7 @@ if __name__ == '__main__':
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
-            if count_time <= 100:
+            if count_time <= 1:
                 for i in circles:
                     i.update()
                     all_sprites.draw(screen)
