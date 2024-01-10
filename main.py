@@ -30,7 +30,7 @@ if __name__ == '__main__':
     sc = pygame.image.load('сцена.png')
     screen.blit(sc, (484, 14))  # отрисовка поля боя
 
-    score = 50  # счетчик монет
+    score = 75  # счетчик монет
     f11 = pygame.font.Font(None, 40)
 
     character_1 = pygame.image.load('перс1/1.png')
@@ -461,8 +461,8 @@ if __name__ == '__main__':
                         fff = True
                         for i in winning:
                             if i == 100:
-                                money_win += 15
-                                score += 15
+                                money_win += 20
+                                score += 20
                     else:
                         hp_ch = int(list_hp[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
