@@ -396,7 +396,7 @@ if __name__ == '__main__':
     percentages2 = 100
     att = len(all_sprites.sprites())
     hp_ch = int(list_hp[list_for_j[j]])
-    hp_enemy = int(list_hp_enemy[list_for_j[j]])
+    hp_enemy = int(list_hp_enemy[list_for_j_en[j_en]])
 
     fff = False
     money_win = 0
@@ -465,7 +465,7 @@ if __name__ == '__main__':
                                 score += 15
                     else:
                         hp_ch = int(list_hp[list_for_j[j]])
-                        hp_enemy = int(list_hp_enemy[j])
+                        hp_enemy = int(list_hp_enemy[list_for_j_en[j_en]])
                         rect1_x = 206
                         rect2_x = 206
                         element_x = 100
@@ -485,7 +485,6 @@ if __name__ == '__main__':
             if run_image:
 
                 if run_flag_enemy:
-
                     screen.blit(sc, (484, 14))
                     screen.blit(list_to_attack_characters[selected_characters[j]][0], (951, 141))
                     pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
@@ -500,8 +499,8 @@ if __name__ == '__main__':
 
                     else:
 
-                        hp_ch = int(list_hp[list_for_j[j]]) - list_attack_power_enemy[j]
-                        print(hp_ch)
+                        hp_ch = int(list_hp[list_for_j[j]]) - list_attack_power_enemy[list_for_j_en[j_en]]
+                        print(hp_ch, hp_enemy)
                         element_x2 = round(hp_ch * percentages2 / int(list_hp[list_for_j[j]]))
                         list_hp[list_for_j[j]] = hp_ch
                         percentages2 = element_x2
@@ -541,10 +540,10 @@ if __name__ == '__main__':
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
-                        hp_enemy = int(list_hp_enemy[j]) - (int(list_attack_power[j]) * round((12 - att + 4) * 100 / 12)) / 100
-
-                        element_x = round(hp_enemy * percentages / list_hp_enemy[j])
-                        list_hp_enemy[j] = hp_enemy
+                        hp_enemy = int(list_hp_enemy[list_for_j_en[j_en]]) - (int(list_attack_power[list_for_j[j]]) * round((12 - att + 4) * 100 / 12)) / 100
+                        print(hp_ch, hp_enemy)
+                        element_x = round(hp_enemy * percentages / list_hp_enemy[list_for_j_en[j_en]])
+                        list_hp_enemy[list_for_j_en[j_en]] = hp_enemy
                         percentages = element_x
 
                         rect1_x = 2.06 * element_x
@@ -573,7 +572,7 @@ if __name__ == '__main__':
             screen.blit(basket, (484, 421))
             count_time += 1
             if block_stop_3_s == 1:
-                hp_ch = int(list_hp1[list_for_j[j]])
+                print(list_attack_power[list_for_j[j]])
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
@@ -823,11 +822,10 @@ if __name__ == '__main__':
                         percentages = 100
                         percentages2 = 100
                         att = 16
+                        list_hp = list_hp1
                         hp_ch = int(list_hp1[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[j])
-                        print(hp_ch)
 
-                        fff = False
                         money_win = 0
 
                         rect1_x = 206
@@ -836,6 +834,7 @@ if __name__ == '__main__':
                         element_x2 = 100
 
                         flag = True
+                        fff = False
 
                 if left_button_rect_5.collidepoint(mouse_pos):
                     current_image_5 -= 1
