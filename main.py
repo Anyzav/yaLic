@@ -824,7 +824,7 @@ if __name__ == '__main__':
                         percentages2 = 100
                         att = 16
                         if red:
-                            list_hp = list_hp1
+                            #list_hp = list_hp1
                             list_attack_power[list_for_j[j]] = str(int(list_attack_power[list_for_j[j]]) + int(list_raising_attack[list_for_j[j]]))
                             red = False
                         hp_ch = int(list_hp1[list_for_j[j]])
