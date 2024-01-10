@@ -391,12 +391,11 @@ if __name__ == '__main__':
     flag_attack = True
     list_for_j = [0]
     j = 0
-    j_en = 0
     percentages = 100
     percentages2 = 100
     att = len(all_sprites.sprites())
     hp_ch = int(list_hp[list_for_j[j]])
-    hp_enemy = int(list_hp_enemy[list_for_j_en[j_en]])
+    hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
 
     fff = False
     money_win = 0
@@ -465,7 +464,7 @@ if __name__ == '__main__':
                                 score += 15
                     else:
                         hp_ch = int(list_hp[list_for_j[j]])
-                        hp_enemy = int(list_hp_enemy[list_for_j_en[j_en]])
+                        hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
                         rect1_x = 206
                         rect2_x = 206
                         element_x = 100
@@ -499,7 +498,7 @@ if __name__ == '__main__':
 
                     else:
 
-                        hp_ch = int(list_hp[list_for_j[j]]) - list_attack_power_enemy[list_for_j_en[j_en]]
+                        hp_ch = int(list_hp[list_for_j[j]]) - list_attack_power_enemy[list_for_j_en[j]]
                         print(hp_ch, hp_enemy)
                         element_x2 = round(hp_ch * percentages2 / int(list_hp[list_for_j[j]]))
                         list_hp[list_for_j[j]] = hp_ch
@@ -540,10 +539,10 @@ if __name__ == '__main__':
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
-                        hp_enemy = int(list_hp_enemy[list_for_j_en[j_en]]) - (int(list_attack_power[list_for_j[j]]) * round((12 - att + 4) * 100 / 12)) / 100
+                        hp_enemy = int(list_hp_enemy[list_for_j_en[j]]) - (int(list_attack_power[list_for_j[j]]) * round((12 - att + 4) * 100 / 12)) / 100
                         print(hp_ch, hp_enemy)
-                        element_x = round(hp_enemy * percentages / list_hp_enemy[list_for_j_en[j_en]])
-                        list_hp_enemy[list_for_j_en[j_en]] = hp_enemy
+                        element_x = round(hp_enemy * percentages / list_hp_enemy[list_for_j_en[j]])
+                        list_hp_enemy[list_for_j_en[j]] = hp_enemy
                         percentages = element_x
 
                         rect1_x = 2.06 * element_x
@@ -824,7 +823,8 @@ if __name__ == '__main__':
                         att = 16
                         list_hp = list_hp1
                         hp_ch = int(list_hp1[list_for_j[j]])
-                        hp_enemy = int(list_hp_enemy[j])
+                        hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
+                        list_attack_power[list_for_j[j]] = str( int(list_attack_power[list_for_j[j]]) + int(list_raising_attack[list_for_j[j]]))
 
                         money_win = 0
 
