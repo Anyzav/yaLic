@@ -397,7 +397,6 @@ if __name__ == '__main__':
     att = len(all_sprites.sprites())
     hp_ch = int(list_hp[list_for_j[j]])
     hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
-    red = False
 
     fff = False
     money_win = 0
@@ -450,6 +449,7 @@ if __name__ == '__main__':
 
         if run:
             window()
+            list_hp = list_hp
             if stop_image:
                 if hp_ch <= 0 or hp_enemy <= 0:
                     if hp_enemy <= 0:
@@ -567,7 +567,6 @@ if __name__ == '__main__':
 
 
         if block_run:
-
             screen.blit(basket, (484, 421))
             count_time += 1
             if block_stop_3_s == 1:
@@ -639,7 +638,6 @@ if __name__ == '__main__':
                         list_hp[current_image_5] = list_hp1[current_image_5]
                         list_attack_power1[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
                         list_attack_power[current_image_5] = list_attack_power1[current_image_5]
-                        red = True
 
                 if fff:
                     if f1f1f1.collidepoint(mouse_pos):
@@ -823,11 +821,7 @@ if __name__ == '__main__':
                         percentages = 100
                         percentages2 = 100
                         att = 16
-                        if red:
-                            #list_hp = list_hp1
-                            list_attack_power[list_for_j[j]] = str(int(list_attack_power[list_for_j[j]]) + int(list_raising_attack[list_for_j[j]]))
-                            red = False
-                        hp_ch = int(list_hp1[list_for_j[j]])
+                        hp_ch = int(list_hp[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
 
 
