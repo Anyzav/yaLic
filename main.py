@@ -259,6 +259,11 @@ if __name__ == '__main__':
     screen.blit(displaying_enemies_on_the_screen[2], (245, 44))
     screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
 
+    list_for_j_en.append(enemies_of_choice.index(displaying_enemies_on_the_screen[0]))
+    list_for_j_en.append(enemies_of_choice.index(displaying_enemies_on_the_screen[1]))
+    list_for_j_en.append(enemies_of_choice.index(displaying_enemies_on_the_screen[2]))
+    list_for_j_en.append(enemies_of_choice.index(displaying_enemies_on_the_screen[3]))
+    print(list_for_j_en)
 
 
     count_anim = 0
