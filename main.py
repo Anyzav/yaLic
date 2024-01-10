@@ -194,6 +194,7 @@ if __name__ == '__main__':
     list_hp = []  # список жизней персонажей
     list_hp1 = []
     list_attack_power = []  # список силы атаки персонажей
+    list_attack_power1 = []
     list_raising_HP = []  # список повышения единиц жизней
     list_raising_attack = []  # список повышения единиц силы атаки
     list_cost = []  # список стоимосости повышения
@@ -212,6 +213,7 @@ if __name__ == '__main__':
         list_hp.append(elem[2])
         list_hp1.append(elem[2])
         list_attack_power.append(elem[3])
+        list_attack_power1.append(elem[3])
         list_raising_HP.append(elem[4])
         list_raising_attack.append(elem[5])
         list_cost.append(elem[6])
@@ -263,7 +265,6 @@ if __name__ == '__main__':
     list_for_j_en.append(enemies_of_choice.index(displaying_enemies_on_the_screen[1]))
     list_for_j_en.append(enemies_of_choice.index(displaying_enemies_on_the_screen[2]))
     list_for_j_en.append(enemies_of_choice.index(displaying_enemies_on_the_screen[3]))
-    print(list_for_j_en)
 
 
     count_anim = 0
@@ -404,7 +405,6 @@ if __name__ == '__main__':
     flag = True
 
     while flag:
-        #print(list_for_j)
         pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43))
         score_text = f11.render(f"Счет: {score}", True, (255, 255, 255))
         screen.blit(score_text, (1065, 572))
@@ -427,7 +427,7 @@ if __name__ == '__main__':
         pygame.draw.rect(screen, (107, 66, 189), (25, 468, 132, 90))  # вывод на экран характеристик
         name = list_name[current_image_5]
         hp = list_hp1[current_image_5]
-        attack_power = list_attack_power[current_image_5]
+        attack_power = list_attack_power1[current_image_5]
         cost = list_cost[current_image_5]
         text1 = f7.render(f'Имя: {name}', True, (255, 255, 255))
         screen.blit(text1, (30, 478))
@@ -540,7 +540,7 @@ if __name__ == '__main__':
                         screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
                     time.sleep(0.09)
                     if count_anim == len(list_to_attack_characters[selected_characters[j]]) - 1:
-                        hp_enemy = int(list_hp_enemy[list_for_j_en[j]]) - (int(list_attack_power[list_for_j[j]]) * round((12 - att + 4) * 100 / 12)) / 100
+                        hp_enemy = int(list_hp_enemy[list_for_j_en[j]]) - (int(list_attack_power1[list_for_j[j]]) * round((12 - att + 4) * 100 / 12)) / 100
                         element_x = round(hp_enemy * percentages / list_hp_enemy[list_for_j_en[j]])
                         list_hp_enemy[list_for_j_en[j]] = hp_enemy
                         percentages = element_x
@@ -637,7 +637,8 @@ if __name__ == '__main__':
                         score -= cost
                         list_hp1[current_image_5] = str(int(list_hp1[current_image_5]) + int(list_raising_HP[current_image_5]))
                         list_hp[current_image_5] = list_hp1[current_image_5]
-                        list_attack_power[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
+                        list_attack_power1[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
+                        list_attack_power[current_image_5] = list_attack_power1[current_image_5]
                         red = True
 
                 if fff:
@@ -824,8 +825,7 @@ if __name__ == '__main__':
                         att = 16
                         if red:
                             list_hp = list_hp1
-                            list_attack_power[list_for_j[j]] = str(
-                                int(list_attack_power[list_for_j[j]]) + int(list_raising_attack[list_for_j[j]]))
+                            list_attack_power[list_for_j[j]] = str(int(list_attack_power[list_for_j[j]]) + int(list_raising_attack[list_for_j[j]]))
                             red = False
                         hp_ch = int(list_hp1[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
