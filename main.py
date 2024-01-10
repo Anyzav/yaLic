@@ -571,7 +571,7 @@ if __name__ == '__main__':
             screen.blit(basket, (484, 421))
             count_time += 1
             if block_stop_3_s == 1:
-                print(list_attack_power[list_for_j[j]] - att)
+                print(int(list_attack_power[list_for_j[j]]) - att)
                 time.sleep(1)
                 for i in range(12):
                     circles.append(Ball(20))
