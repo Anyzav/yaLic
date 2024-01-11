@@ -448,17 +448,17 @@ if __name__ == '__main__':
             if stop_image:
                 if hp_ch <= 0 or hp_enemy <= 0:
                     if hp_enemy <= 0:
-                        winning[j] = 100
+                        winning[j] = 1
                     j += 1
                     if j == 4:
                         stop_image = False
                         run = False
                         fff = True
                         for i in winning:
-                            if i == 100:
+                            if i == 1:
                                 money_win += 20
                                 score += 20
-                                flag_level = True
+                            flag_level = True
                     else:
                         hp_ch = int(list_hp[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
