@@ -326,27 +326,23 @@ if __name__ == '__main__':
 
     current_image = 0
 
-    block_run = False
-    block_stop_3_s = 0
+    block_run = False  # анимация с шариками
+    block_stop_3_s = 0  # счётчик времени
 
 
-    experience = 0
     f8 = pygame.font.Font(None, 50)
 
-    count_time = 0
+    count_time = 0  # счётчик времени
 
-    rect1_x = 206
+    rect1_x = 206  # для линии жизни
     rect2_x = 206
 
-    def new(e):
-        # global exper
-        # exper = 0
+    def new():  # счёт очков в %
         pygame.draw.rect(screen, (75, 0, 130), (1063, 457, 60, 51))
         text1 = f8.render(str(round((12 - len(all_sprites.sprites()) + 4) * 100 / 12)), True, (245, 255, 255))
         screen.blit(text1, (1065, 466))
-        # exper = e
 
-    def draw_character_anim():
+    def draw_character_anim():  # для анимации
         screen.blit(sc, (484, 14))
         pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
         pygame.draw.rect(screen, (139, 0, 0), (941, 61, rect2_x, 22))
@@ -359,7 +355,7 @@ if __name__ == '__main__':
         elif displaying_enemies_on_the_screen[j] == enemy_4:
             screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
 
-    def draw_enemy_anim():
+    def draw_enemy_anim():  # для анимации
         screen.blit(sc, (484, 14))
         screen.blit(list_to_attack_characters[selected_characters[j]][0], (951, 141))
         pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
@@ -367,7 +363,7 @@ if __name__ == '__main__':
         pygame.draw.rect(screen, (255, 255, 255), (558, 25, 208, 24), 2)
         pygame.draw.rect(screen, (255, 255, 255), (939, 61, 208, 24), 2)
 
-    def window():
+    def window():  # для анимации
         screen.blit(sc, (484, 14))
         pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
         pygame.draw.rect(screen, (139, 0, 0), (941, 61, rect2_x, 22))
@@ -382,19 +378,19 @@ if __name__ == '__main__':
             screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
 
 
-    winning = [0, 0, 0, 0]
+    winning = [0, 0, 0, 0]  # для количества монет
     flag_attack = True
-    list_for_j = [0]
-    j = 0
-    percentages = 100
-    percentages2 = 100
-    att = len(all_sprites.sprites())
-    hp_ch = int(list_hp[list_for_j[j]])
-    hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
+    list_for_j = [0]  # для аниамции
+    j = 0  # для аниамции
+    percentages = 100  # для аниамции
+    percentages2 = 100  # для аниамции
+    att = len(all_sprites.sprites())  # кол-во спрайтов
+    hp_ch = int(list_hp[list_for_j[j]])  # жизни персонажа
+    hp_enemy = int(list_hp_enemy[list_for_j_en[j]])  # жизни врага
 
-    fff = False
-    money_win = 0
-    flag_level = True
+    fff = False  # вывод монет
+    money_win = 0  # монеты
+    flag_level = True  # для улучшения характеристик
 
     flag = True
 
@@ -402,7 +398,7 @@ if __name__ == '__main__':
         pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43))
         score_text = f11.render(f"Счет: {score}", True, (255, 255, 255))
         screen.blit(score_text, (1065, 572))
-        new(experience)
+        new()
 
         level_up = pygame.draw.rect(screen, (107, 66, 189), (335, 605, 134, 31))  # конпка улучшить
         f4 = pygame.font.Font(None, 25)
@@ -432,7 +428,7 @@ if __name__ == '__main__':
         text1 = f7.render(f'Цена повышения: {cost}', True, (255, 255, 255))
         screen.blit(text1, (30, 538))
 
-        if fff:
+        if fff: # для улучшения характеристик
             screen.blit(sc, (484, 14))
             f9 = pygame.font.Font(None, 80)
             text1 = f9.render(f'Вы выиграли {money_win} монет', True, (255, 255, 255))
@@ -444,8 +440,7 @@ if __name__ == '__main__':
 
         if run:
             window()
-            list_hp = list_hp
-            if stop_image:
+            if stop_image:  # анимация и вывод монет
                 if hp_ch <= 0 or hp_enemy <= 0:
                     if hp_enemy <= 0:
                         winning[j] = 1
@@ -478,7 +473,7 @@ if __name__ == '__main__':
 
 
 
-            if run_image:
+            if run_image:  # анимация
 
                 if run_flag_enemy:
                     screen.blit(sc, (484, 14))
@@ -561,7 +556,7 @@ if __name__ == '__main__':
                     screen.blit(kill[count_kill], (753, 168))
 
 
-        if block_run:
+        if block_run:  # анимация
             screen.blit(basket, (484, 421))
             count_time += 1
             if block_stop_3_s == 1:
@@ -623,18 +618,15 @@ if __name__ == '__main__':
                 mouse_pos = pygame.mouse.get_pos()
 
                 if level_up.collidepoint(mouse_pos):
-                    # sql_update_query = """Update pers set Attack_power = 10000 where id = 4"""
-                    # cur.execute(sql_update_query)
-                    # con.commit()
                     if flag_level:
-                        if score >= cost:
+                        if score >= cost:  # монеты
                             score -= cost
                             list_hp1[current_image_5] = str(int(list_hp1[current_image_5]) + int(list_raising_HP[current_image_5]))
                             list_hp[current_image_5] = list_hp1[current_image_5]
                             list_attack_power1[current_image_5] = str(int(list_attack_power[current_image_5]) + int(list_raising_attack[current_image_5]))
                             list_attack_power[current_image_5] = list_attack_power1[current_image_5]
 
-                if fff:
+                if fff:  # следующий круг
                     if f1f1f1.collidepoint(mouse_pos):
                         pygame.draw.rect(screen, (230, 230, 250), (13, 12, 462, 23))  # имя, уровень, выйти из аккаунта
                         pygame.draw.rect(screen, (220, 20, 60), (13, 42, 462, 183), 2)  # враги
@@ -842,7 +834,7 @@ if __name__ == '__main__':
                         flag = True
                         fff = False
 
-                if flag_level:
+                if flag_level:  # листание характеристик
                     if left_button_rect_5.collidepoint(mouse_pos):
                         current_image_5 -= 1
                         if current_image_5 < 0:
