@@ -8,9 +8,8 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode((1280, 650))
     screen.fill((0, 0, 0))
     pygame.display.set_caption("Game")
-    pygame.mixer.music.load("445a6d5c5c7fd4d.mp3")
+    pygame.mixer.music.load("445a6d5c5c7fd4d.mp3")  # музыка
     pygame.mixer.music.play(-1)
-    pygame.draw.rect(screen, (230, 230, 250), (13, 12, 462, 23))  # имя, уровень, выйти из аккаунта
     pygame.draw.rect(screen, (220, 20, 60), (13, 42, 462, 183), 2)  # враги
     pygame.draw.line(screen, (220, 20, 60), [121, 42], [121, 224], 2)
     pygame.draw.line(screen, (220, 20, 60), [242, 42], [242, 224], 2)
@@ -247,22 +246,22 @@ if __name__ == '__main__':
     displaying_enemies_on_the_screen = []  # список врагов для вывода на экран
     displaying_enemies_on_the_screen = random.choices(enemies_of_choice, k=4)  # выбор 4 врагов
 
-    list_for_j_en = []
+    list_for_j_en = []  # счетчик для врагов, исп-ых в бою
     screen.blit(displaying_enemies_on_the_screen[0], (16, 44))  # вывод врагов на экран
     screen.blit(displaying_enemies_on_the_screen[1], (125, 44))
     screen.blit(displaying_enemies_on_the_screen[2], (245, 44))
     screen.blit(displaying_enemies_on_the_screen[3], (364, 44))
 
-    count_anim = 0
-    count_kill = 0
-    count_enemy = 0
-    run = False
-    run_flag_enemy = False
-    run_flag_character = True
-    stop_image = True
-    run_image = False
+    count_anim = 0  # счетчик анимаций перс
+    count_kill = 0  # счетчик анимаций удара
+    count_enemy = 0  # счетчик анимации врагов
+    run = False  # флаг анимации
+    run_flag_enemy = False  # флаг анимации врага
+    run_flag_character = True  # флаг анимации перс
+    stop_image = True  # флаг анимации 2
+    run_image = False  # флаг анимации врагов и перс
 
-    all_sprites = pygame.sprite.Group()
+    all_sprites = pygame.sprite.Group()  # группа спрайтов - кружков и 4 стенок
 
     basket = pygame.image.load('корзинка.png')
 
@@ -316,26 +315,23 @@ if __name__ == '__main__':
 
     current_image = 0
 
-    block_run = False
-    block_stop_3_s = 0
+    block_run = False  # анимация с шариками
+    block_stop_3_s = 0  # счетчик времени
 
     experience = 0
     f8 = pygame.font.Font(None, 50)
 
-    count_time = 0
+    count_time = 0  # счетчик времени
 
-    rect1_x = 206
+    rect1_x = 206  # для линии жизни
     rect2_x = 206
 
-    def new(e):
-        # global exper
-        # exper = 0
+    def new():  # счет очков в процентах
         pygame.draw.rect(screen, (75, 0, 130), (1063, 457, 60, 51))
         text1 = f8.render(str(round((12 - len(all_sprites.sprites()) + 4) * 100 / 12)), True, (245, 255, 255))
         screen.blit(text1, (1065, 466))
-        # exper = e
 
-    def draw_character_anim():
+    def draw_character_anim():  # для анимации
         screen.blit(sc, (484, 14))
         pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
         pygame.draw.rect(screen, (139, 0, 0), (941, 61, rect2_x, 22))
@@ -348,7 +344,7 @@ if __name__ == '__main__':
         elif displaying_enemies_on_the_screen[j] == enemy_4:
             screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
 
-    def draw_enemy_anim():
+    def draw_enemy_anim():  # для анимации
         screen.blit(sc, (484, 14))
         screen.blit(list_to_attack_characters[selected_characters[j]][0], (951, 141))
         pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
@@ -356,7 +352,7 @@ if __name__ == '__main__':
         pygame.draw.rect(screen, (255, 255, 255), (558, 25, 208, 24), 2)
         pygame.draw.rect(screen, (255, 255, 255), (939, 61, 208, 24), 2)
 
-    def window():
+    def window():  # для анимации
         screen.blit(sc, (484, 14))
         pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
         pygame.draw.rect(screen, (139, 0, 0), (941, 61, rect2_x, 22))
@@ -370,19 +366,19 @@ if __name__ == '__main__':
         elif displaying_enemies_on_the_screen[j] == enemy_4:
             screen.blit(to_attack_enemy[displaying_enemies_on_the_screen[j]][0], (500, 100))
 
-    winning = [0, 0, 0, 0]
+    winning = [0, 0, 0, 0]  # список с результатами игры для счетчика
     flag_attack = True
-    list_for_j = [0]
-    j = 0
+    list_for_j = [0]  # для анимации
+    j = 0  # для анимации
     j_en = 0
     percentages = 100
     percentages2 = 100
-    att = len(all_sprites.sprites())
-    hp_ch = int(list_hp[list_for_j[j]])
-    hp_enemy = int(list_hp_enemy[list_for_j[j]])
+    att = len(all_sprites.sprites())  # кол-во спрайтов
+    hp_ch = int(list_hp[list_for_j[j]])  # жизни перс
+    hp_enemy = int(list_hp_enemy[list_for_j[j]])  # жизни врага
 
-    fff = False
-    money_win = 0
+    fff = False  # вывод монет
+    money_win = 0  # монеты
 
     flag = True
 
@@ -420,7 +416,7 @@ if __name__ == '__main__':
         text1 = f7.render(f'Цена повышения: {cost}', True, (255, 255, 255))
         screen.blit(text1, (30, 538))
 
-        if fff:
+        if fff:  # улучшении хар-ки
             screen.blit(sc, (484, 14))
             f9 = pygame.font.Font(None, 80)
             text1 = f9.render(f'Вы выиграли {money_win} монет', True, (255, 255, 255))
@@ -432,7 +428,7 @@ if __name__ == '__main__':
 
         if run:
             window()
-            if stop_image:
+            if stop_image:  # анимация и вавод монет
                 if hp_ch <= 0 or hp_enemy <= 0:
                     if hp_enemy <= 0:
                         winning[j] = 1
@@ -464,10 +460,8 @@ if __name__ == '__main__':
 
 
 
-            if run_image:
-
+            if run_image:  # анимация
                 if run_flag_enemy:
-
                     screen.blit(sc, (484, 14))
                     screen.blit(list_to_attack_characters[selected_characters[j]][0], (951, 141))
                     pygame.draw.rect(screen, (139, 0, 0), (560, 25, rect1_x, 22))
