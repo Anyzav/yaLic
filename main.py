@@ -22,7 +22,6 @@ if __name__ == '__main__':
     pygame.draw.rect(screen, (72, 61, 139), (13, 415, 462, 226), 2)  # описание персонажа
     pygame.draw.rect(screen, (139, 0, 0), (482, 12, 787, 398), 2)  # поле боя
     pygame.draw.rect(screen, (75, 0, 130), (482, 419, 571, 219), 2)  # корзинка
-    pygame.draw.circle(screen, (244, 164, 96), (1199, 485), 63, 2)  # магазин
     pygame.draw.rect(screen, (255, 215, 0), (1063, 564, 207, 43), 2)
 
     sc = pygame.image.load('сцена.png')
@@ -724,6 +723,27 @@ if __name__ == '__main__':
                         screen.blit(text2, (372, 230))
                         screen.blit(text3, (450, 230))
 
+                        con = sqlite3.connect('characterization.sqlite')  # подключаем БД
+                        cur = con.cursor()
+                        result = cur.execute("""SELECT * FROM pers""").fetchall()
+                        list_hp1 = []
+                        list_attack_power1 = []
+                        for elem in result:
+                            list_name.append(elem[1])
+                            list_hp.append(elem[2])
+                            list_hp1.append(elem[2])
+                            list_attack_power.append(elem[3])
+                            list_attack_power1.append(elem[3])
+                            list_raising_HP.append(elem[4])
+                            list_raising_attack.append(elem[5])
+
+                        result_2 = cur.execute("""SELECT * FROM villains""").fetchall()
+                        for elem in result_2:
+                            list_name_enemy.append(elem[1])
+                            list_hp_enemy.append(elem[2])
+                            list_attack_power_enemy.append(elem[3])
+                            list_raising_HP_enemy.append(elem[4])
+                            list_raising_attack_enemy.append(elem[5])
                         list_name = []  # список имён персонажей
                         list_hp = []  # список жизней персонажей
                         list_attack_power = []  # список силы атаки персонажей
