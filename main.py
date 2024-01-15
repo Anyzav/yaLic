@@ -461,9 +461,6 @@ if __name__ == '__main__':
                         element_x2 = 100
                         percentages = 100
                         percentages2 = 100
-                if j == 4:
-                    stop_image = False
-                    run = False
                 else:
                     window()
                     block_run = True
@@ -501,9 +498,6 @@ if __name__ == '__main__':
                         run_image = False
                         count_kill = 0
                         window()
-
-
-
 
 
                     if displaying_enemies_on_the_screen[j] == enemy_1 or displaying_enemies_on_the_screen[j] == enemy_2:
@@ -818,7 +812,6 @@ if __name__ == '__main__':
                         att = 16
                         hp_ch = int(list_hp[list_for_j[j]])
                         hp_enemy = int(list_hp_enemy[list_for_j_en[j]])
-                        print(list_hp)
 
 
                         money_win = 0
